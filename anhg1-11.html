@@ -1,0 +1,1579 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Thi Tiếng Anh - Revision for First Term Test</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #4a6fa5;
+            padding-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section-title {
+            background-color: #4a6fa5;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+        
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #4a6fa5;
+            transition: all 0.3s ease;
+        }
+        
+        .question.answered {
+            background-color: #f0f8ff;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .options {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .option {
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .option:hover {
+            background-color: #e9ecef;
+        }
+        
+        .option.selected {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+        }
+        
+        .option.correct {
+            background-color: #d4edda !important;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .option.incorrect {
+            background-color: #f8d7da !important;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .answer-feedback {
+            margin-top: 10px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            display: none;
+        }
+        
+        .answer-feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 3px solid #28a745;
+            display: block;
+        }
+        
+        .answer-feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 3px solid #dc3545;
+            display: block;
+        }
+        
+        .control-panel {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 12px 25px;
+            background-color: #4a6fa5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #3a5a80;
+        }
+        
+        #submit-btn {
+            background-color: #27ae60;
+        }
+        
+        #submit-btn:hover {
+            background-color: #219653;
+        }
+        
+        #reset-btn {
+            background-color: #e74c3c;
+        }
+        
+        #reset-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #e8f4fc;
+            border-radius: 5px;
+            border-left: 5px solid #3498db;
+            display: none;
+        }
+        
+        .score {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .score-detail {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+        
+        .progress-container {
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .question-stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .stat {
+            padding: 10px;
+            min-width: 120px;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .correct-stat {
+            color: #27ae60;
+        }
+        
+        .incorrect-stat {
+            color: #e74c3c;
+        }
+        
+        .unanswered-stat {
+            color: #f39c12;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .control-panel {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            button {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .question-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>REVISION FOR THE FIRST TERM TEST -- 11 GLOBAL SUCCESS</h1>
+            <p>Chọn đáp án và xem kết quả ngay lập tức</p>
+        </div>
+        
+        <!-- Phần I: Stress Pattern -->
+        <div class="section">
+            <div class="section-title">I. Choose the word which has a different stress pattern from the others</div>
+            
+            <!-- Câu 1 -->
+            <div class="question" id="q1">
+                <div class="question-number">1. A. healthy B. issue C. cover D. release</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. healthy</div>
+                    <div class="option" data-value="B">B. issue</div>
+                    <div class="option" data-value="C">C. cover</div>
+                    <div class="option" data-value="D">D. release</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 2 -->
+            <div class="question" id="q2">
+                <div class="question-number">2. A. lifestyle B. service C. routine D. dweller</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. lifestyle</div>
+                    <div class="option" data-value="B">B. service</div>
+                    <div class="option" data-value="C">C. routine</div>
+                    <div class="option" data-value="D">D. dweller</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 3 -->
+            <div class="question" id="q3">
+                <div class="question-number">3. A. device B. treatment C. value D. digital</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. device</div>
+                    <div class="option" data-value="B">B. treatment</div>
+                    <div class="option" data-value="C">C. value</div>
+                    <div class="option" data-value="D">D. digital</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 4 -->
+            <div class="question" id="q4">
+                <div class="question-number">4. A. replace B. proper C. attract D. infect</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. replace</div>
+                    <div class="option" data-value="B">B. proper</div>
+                    <div class="option" data-value="C">C. attract</div>
+                    <div class="option" data-value="D">D. infect</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 5 -->
+            <div class="question" id="q5">
+                <div class="question-number">5. A. return B. contain C. include D. treadmill</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. return</div>
+                    <div class="option" data-value="B">B. contain</div>
+                    <div class="option" data-value="C">C. include</div>
+                    <div class="option" data-value="D">D. treadmill</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 6 -->
+            <div class="question" id="q6">
+                <div class="question-number">6. A. organise B. energy C. position D. diagram</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. organise</div>
+                    <div class="option" data-value="B">B. energy</div>
+                    <div class="option" data-value="C">C. position</div>
+                    <div class="option" data-value="D">D. diagram</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 7 -->
+            <div class="question" id="q7">
+                <div class="question-number">7. A. infectious B. attention C. contribute D. demonstrate</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. infectious</div>
+                    <div class="option" data-value="B">B. attention</div>
+                    <div class="option" data-value="C">C. contribute</div>
+                    <div class="option" data-value="D">D. demonstrate</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 8 -->
+            <div class="question" id="q8">
+                <div class="question-number">8. A. ability B. traditional C. opportunity D. awareness</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. ability</div>
+                    <div class="option" data-value="B">B. traditional</div>
+                    <div class="option" data-value="C">C. opportunity</div>
+                    <div class="option" data-value="D">D. awareness</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 9 -->
+            <div class="question" id="q9">
+                <div class="question-number">9. A. substance B. variety C. cultural D. nutrient</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. substance</div>
+                    <div class="option" data-value="B">B. variety</div>
+                    <div class="option" data-value="C">C. cultural</div>
+                    <div class="option" data-value="D">D. nutrient</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 10 -->
+            <div class="question" id="q10">
+                <div class="question-number">10. A. offer B. escape C. advance D. respond</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. offer</div>
+                    <div class="option" data-value="B">B. escape</div>
+                    <div class="option" data-value="C">C. advance</div>
+                    <div class="option" data-value="D">D. respond</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Phần II: Multiple Choice Questions -->
+        <div class="section">
+            <div class="section-title">II. Choose the letter A, B, C, or D to indicate the correct answer</div>
+            
+            <!-- Câu 11 -->
+            <div class="question" id="q11">
+                <div class="question-number">11. Life _______ for smokers is shorter than for people who don't smoke.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. strength</div>
+                    <div class="option" data-value="B">B. expectation</div>
+                    <div class="option" data-value="C">C. expectancy</div>
+                    <div class="option" data-value="D">D. routine</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 12 -->
+            <div class="question" id="q12">
+                <div class="question-number">12. Check the _______ of all food products to understand what you are eating.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. energy</div>
+                    <div class="option" data-value="B">B. emissions</div>
+                    <div class="option" data-value="C">C. pollutants</div>
+                    <div class="option" data-value="D">D. ingredients</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 13 -->
+            <div class="question" id="q13">
+                <div class="question-number">13. It is impossible to avoid daily _______ when you live with your extended family.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. views</div>
+                    <div class="option" data-value="B">B. attitudes</div>
+                    <div class="option" data-value="C">C. characteristics</div>
+                    <div class="option" data-value="D">D. arguments</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 14 -->
+            <div class="question" id="q14">
+                <div class="question-number">14. Some can cause _______ diseases such as tuberculosis and food poisoning.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. healthy</div>
+                    <div class="option" data-value="B">B. regular</div>
+                    <div class="option" data-value="C">C. infectious</div>
+                    <div class="option" data-value="D">D. confident</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 15 -->
+            <div class="question" id="q15">
+                <div class="question-number">15. _______ is the difference in the thoughts and viewpoints amongst generations living together.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Generation gap</div>
+                    <div class="option" data-value="B">B. Work experience</div>
+                    <div class="option" data-value="C">C. Traditional view</div>
+                    <div class="option" data-value="D">D. Cultural value</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 16 -->
+            <div class="question" id="q16">
+                <div class="question-number">16. After graduating from university, I want to _______ my father's footsteps.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. follow in</div>
+                    <div class="option" data-value="B">B. succeed in</div>
+                    <div class="option" data-value="C">C. take place</div>
+                    <div class="option" data-value="D">D. wash away</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 17 -->
+            <div class="question" id="q17">
+                <div class="question-number">17. The city is so _______ that pollution and heavy traffic are common problems.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. liveable</div>
+                    <div class="option" data-value="B">B. sustainable</div>
+                    <div class="option" data-value="C">C. overcrowded</div>
+                    <div class="option" data-value="D">D. urban</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 18 -->
+            <div class="question" id="q18">
+                <div class="question-number">18. The _______ of our city needs upgrading. It is in an extremely poor condition now.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. infrastructure</div>
+                    <div class="option" data-value="B">B. environment</div>
+                    <div class="option" data-value="C">C. temperature</div>
+                    <div class="option" data-value="D">D. inhabitant</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 19 -->
+            <div class="question" id="q19">
+                <div class="question-number">19. _______ is the fact of a country or city having too many people living in it.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Population</div>
+                    <div class="option" data-value="B">B. Celebration</div>
+                    <div class="option" data-value="C">C. Pollution</div>
+                    <div class="option" data-value="D">D. Overpopulation</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 20 -->
+            <div class="question" id="q20">
+                <div class="question-number">20. To become a volunteer, you must be _______ for the program.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. appreciated</div>
+                    <div class="option" data-value="B">B. qualified</div>
+                    <div class="option" data-value="C">C. controlled</div>
+                    <div class="option" data-value="D">D. sustainable</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 21 -->
+            <div class="question" id="q21">
+                <div class="question-number">21. Cultural _______ is the best way for young people to understand other countries' values and ideas.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. change</div>
+                    <div class="option" data-value="B">B. exchange</div>
+                    <div class="option" data-value="C">C. value</div>
+                    <div class="option" data-value="D">D. tradition</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 22 -->
+            <div class="question" id="q22">
+                <div class="question-number">22. Singapore has made a huge _______ to scholarships for ASEAN's students.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. decision</div>
+                    <div class="option" data-value="B">B. effort</div>
+                    <div class="option" data-value="C">C. contribution</div>
+                    <div class="option" data-value="D">D. arrangement</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 23 -->
+            <div class="question" id="q23">
+                <div class="question-number">23. Students with good _______ skills usually communicate well and manage teamwork effectively.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. successful</div>
+                    <div class="option" data-value="B">B. critical</div>
+                    <div class="option" data-value="C">C. problem-solving</div>
+                    <div class="option" data-value="D">D. leadership</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 24 -->
+            <div class="question" id="q24">
+                <div class="question-number">24. The current _______ relating to the environment is being discussed now.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. exchange</div>
+                    <div class="option" data-value="B">B. contribution</div>
+                    <div class="option" data-value="C">C. knowledge</div>
+                    <div class="option" data-value="D">D. issue</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 25 -->
+            <div class="question" id="q25">
+                <div class="question-number">25. Being told about cultures from other countries annually is an _______ experience.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. surprised</div>
+                    <div class="option" data-value="B">B. eye-opening</div>
+                    <div class="option" data-value="C">C. practical</div>
+                    <div class="option" data-value="D">D. grateful</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 26 -->
+            <div class="question" id="q26">
+                <div class="question-number">26. All participants agree that more opportunities should be given to women so that they can _______ their countries at international events.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. present</div>
+                    <div class="option" data-value="B">B. propose</div>
+                    <div class="option" data-value="C">C. represent</div>
+                    <div class="option" data-value="D">D. release</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 27 -->
+            <div class="question" id="q27">
+                <div class="question-number">27. If people use _______ energy, their impact on the environment is less.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. renewable</div>
+                    <div class="option" data-value="B">B. non-renewable</div>
+                    <div class="option" data-value="C">C. fossil fuel</div>
+                    <div class="option" data-value="D">D. limited</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 28 -->
+            <div class="question" id="q28">
+                <div class="question-number">28. Governments need to limit the amount of _______ that is released into the air.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. fossil fuels</div>
+                    <div class="option" data-value="B">B. atmosphere</div>
+                    <div class="option" data-value="C">C. consequences</div>
+                    <div class="option" data-value="D">D. greenhouse gases</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 29 -->
+            <div class="question" id="q29">
+                <div class="question-number">29. As _______ rise, polar ice caps melt faster, adding more water to oceans.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. temperatures</div>
+                    <div class="option" data-value="B">B. characteristics</div>
+                    <div class="option" data-value="C">C. representatives</div>
+                    <div class="option" data-value="D">D. qualifications</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 30 -->
+            <div class="question" id="q30">
+                <div class="question-number">30. Vietnam's efforts in environmental protection contribute _______ the overall sustainability goals of ASEAN.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. for</div>
+                    <div class="option" data-value="B">B. with</div>
+                    <div class="option" data-value="C">C. to</div>
+                    <div class="option" data-value="D">D. on</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 31 -->
+            <div class="question" id="q31">
+                <div class="question-number">31. Technology will _______ a key role in optimizing resource usage, reducing waste, and improving efficiency.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. make</div>
+                    <div class="option" data-value="B">B. take</div>
+                    <div class="option" data-value="C">C. play</div>
+                    <div class="option" data-value="D">D. put</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 32 -->
+            <div class="question" id="q32">
+                <div class="question-number">32. There is also a growing awareness _______ the need to reduce our impact on the environment.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. for</div>
+                    <div class="option" data-value="B">B. of</div>
+                    <div class="option" data-value="C">C. in</div>
+                    <div class="option" data-value="D">D. with</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 33 -->
+            <div class="question" id="q33">
+                <div class="question-number">33. Smart street infrastructure with sensor technology will provide information _______ faster, cheaper, and better decision-making.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. for</div>
+                    <div class="option" data-value="B">B. with</div>
+                    <div class="option" data-value="C">C. of</div>
+                    <div class="option" data-value="D">D. on</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 34 -->
+            <div class="question" id="q34">
+                <div class="question-number">34. Their children _______ lots of new friends since they _______ to that town.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. have made - moved</div>
+                    <div class="option" data-value="B">B. were making - have moved</div>
+                    <div class="option" data-value="C">C. made - are moving</div>
+                    <div class="option" data-value="D">D. made - have been moving</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 35 -->
+            <div class="question" id="q35">
+                <div class="question-number">35. John _______ in the same house since he left school.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. lived</div>
+                    <div class="option" data-value="B">B. had lived</div>
+                    <div class="option" data-value="C">C. was living</div>
+                    <div class="option" data-value="D">D. has lived</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 36 -->
+            <div class="question" id="q36">
+                <div class="question-number">36. Since Tom _______, I have heard nothing from him.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. had left</div>
+                    <div class="option" data-value="B">B. left</div>
+                    <div class="option" data-value="C">C. has left</div>
+                    <div class="option" data-value="D">D. was left</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 37 -->
+            <div class="question" id="q37">
+                <div class="question-number">37. The noise from the trains _______ me terribly last night.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. was annoyed</div>
+                    <div class="option" data-value="B">B. annoyed</div>
+                    <div class="option" data-value="C">C. has annoyed</div>
+                    <div class="option" data-value="D">D. have annoyed</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 38 -->
+            <div class="question" id="q38">
+                <div class="question-number">38. We _______ each other since we were kids. We're best friends.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. has known</div>
+                    <div class="option" data-value="B">B. knew</div>
+                    <div class="option" data-value="C">C. know</div>
+                    <div class="option" data-value="D">D. have known</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Phần III: Conversation Arrangement -->
+        <div class="section">
+            <div class="section-title">III. Mark the letter A, B, C or D to indicate the best arrangement of utterances to make a meaningful exchange</div>
+            
+            <!-- Câu 39 -->
+            <div class="question" id="q39">
+                <div class="question-number">Question 1.</div>
+                <div style="margin-bottom: 10px; font-style: italic;">
+                    <div>a. Emma: Same here! I've been staying up late every night just to keep up.</div>
+                    <div>b. Liam: We should make a study plan. Maybe it'll help us stay on track.</div>
+                    <div>c. Liam: I have three assignments due this week. I don't know how I'll finish them all!</div>
+                </div>
+                <div class="options">
+                    <div class="option" data-value="A">A. c - a - b</div>
+                    <div class="option" data-value="B">B. b - a - c</div>
+                    <div class="option" data-value="C">C. a - c - b</div>
+                    <div class="option" data-value="D">D. b - c - a</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 40 -->
+            <div class="question" id="q40">
+                <div class="question-number">Question 2.</div>
+                <div style="margin-bottom: 10px; font-style: italic;">
+                    <div>a. Jake: I might take a short trip, but mostly I just want to relax.</div>
+                    <div>b. Jake: I can't wait for summer break! Do you have any plans?</div>
+                    <div>c. Sophie: My family is going to the beach for a week. What about you?</div>
+                </div>
+                <div class="options">
+                    <div class="option" data-value="A">A. c - a - b</div>
+                    <div class="option" data-value="B">B. a - c - b</div>
+                    <div class="option" data-value="C">C. a - b - c</div>
+                    <div class="option" data-value="D">D. b - c - a</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 41 -->
+            <div class="question" id="q41">
+                <div class="question-number">Question 3.</div>
+                <div style="margin-bottom: 10px; font-style: italic;">
+                    <div>a. Noah: I know the feeling! I had to do the dishes and mop the floor today.</div>
+                    <div>b. Ava: I spent the whole morning cleaning my room. It was such a mess!</div>
+                    <div>c. Ava: Chores are tiring, but at least the house looks nice afterwards.</div>
+                </div>
+                <div class="options">
+                    <div class="option" data-value="A">A. c - a - b</div>
+                    <div class="option" data-value="B">B. a - c - b</div>
+                    <div class="option" data-value="C">C. b - a - c</div>
+                    <div class="option" data-value="D">D. c - b - a</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 42 -->
+            <div class="question" id="q42">
+                <div class="question-number">Question 4.</div>
+                <div style="margin-bottom: 10px; font-style: italic;">
+                    <div>a. Olivia: I've started jogging every morning. It makes me feel so energised!</div>
+                    <div>b. Olivia: Staying healthy is all about small daily habits.</div>
+                    <div>c. Ethan: That's great! I've been trying to eat more vegetables and drink more water.</div>
+                </div>
+                <div class="options">
+                    <div class="option" data-value="A">A. b - a - c</div>
+                    <div class="option" data-value="B">B. a - c - b</div>
+                    <div class="option" data-value="C">C. b - c - a</div>
+                    <div class="option" data-value="D">D. c - b - a</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 43 -->
+            <div class="question" id="q43">
+                <div class="question-number">Question 5.</div>
+                <div style="margin-bottom: 10px; font-style: italic;">
+                    <div>a. Mia: It's a mystery thriller - full of unexpected twists! I'll lend it to you.</div>
+                    <div>b. Mia: I just finished an incredible novel! You'd love it.</div>
+                    <div>c. Ben: What makes it so good?</div>
+                </div>
+                <div class="options">
+                    <div class="option" data-value="A">A. b - c - a</div>
+                    <div class="option" data-value="B">B. c - a - b</div>
+                    <div class="option" data-value="C">C. a - c - b</div>
+                    <div class="option" data-value="D">D. a - b - c</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 44 -->
+            <div class="question" id="q44">
+                <div class="question-number">Question 6.</div>
+                <div style="margin-bottom: 10px; font-style: italic;">
+                    <div>a. Ben: That sounds tough. Have you talked to them about how you feel?</div>
+                    <div>b. Mia: My parents keep arguing about everything lately. It's so stressful.</div>
+                    <div>c. Mia: I don't want to make things worse.</div>
+                </div>
+                <div class="options">
+                    <div class="option" data-value="A">A. c - a - b</div>
+                    <div class="option" data-value="B">B. c - b - a</div>
+                    <div class="option" data-value="C">C. b - a - c</div>
+                    <div class="option" data-value="D">D. a - c - b</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Phần IV: Paragraph Arrangement -->
+        <div class="section">
+            <div class="section-title">IV. Mark the letter A, B, C, or D on your answer sheet to indicate the correct arrangement of the sentences to make a meaningful paragraph/letter</div>
+            
+            <!-- Câu 45 -->
+            <div class="question" id="q45">
+                <div class="question-number">Question 7:</div>
+                <div style="margin-bottom: 10px; font-style: italic;">
+                    <div>a. Also, volunteering helps students connect with the community, making them aware of the needs around them.</div>
+                    <div>b. Additionally, students develop such important skills as teamwork and communication ones while they volunteer.</div>
+                    <div>c. Firstly, students who do voluntary work gain valuable real-world experience which can help in their future careers.</div>
+                    <div>d. Finally, doing volunteer work can be a rewarding experience, as students feel good about helping others.</div>
+                    <div>e. High school students benefit from doing voluntary work in many ways.</div>
+                </div>
+                <div class="options">
+                    <div class="option" data-value="A">A. e-c-a-b-d</div>
+                    <div class="option" data-value="B">B. e-a-c-b-d</div>
+                    <div class="option" data-value="C">C. c-a-b-d-e</div>
+                    <div class="option" data-value="D">D. c-e-a-b-d</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 46 -->
+            <div class="question" id="q46">
+                <div class="question-number">Question 8:</div>
+                <div style="margin-bottom: 10px; font-style: italic;">
+                    <div>a. Besides, doing chores together can actually be fun and it makes the work go faster.</div>
+                    <div>b. Dear Mike, I hope you are well! I've been thinking about why it's important for children to help with housework.</div>
+                    <div>c. It's a good way for families to spend time together and learn new skills.</div>
+                    <div>d. Firstly, it teaches us responsibility and how to take care of our own things.</div>
+                    <div>e. Also, when we help our parents, it shows them respect and gratitude for all they do for us.</div>
+                </div>
+                <div class="options">
+                    <div class="option" data-value="A">A. b-c-a-e-d</div>
+                    <div class="option" data-value="B">B. b-d-e-a-c</div>
+                    <div class="option" data-value="C">C. b-a-d-e-c</div>
+                    <div class="option" data-value="D">D. b-e-d-a-c</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 47 -->
+            <div class="question" id="q47">
+                <div class="question-number">Question 9:</div>
+                <div style="margin-bottom: 10px; font-style: italic;">
+                    <div>a. Besides, playing sports can actually be exciting.</div>
+                    <div>b. Dear John, How are you? I've been thinking about why it's important for people to play sports.</div>
+                    <div>c. Finally, it's a good way for us to stay in shape and unwind.</div>
+                    <div>d. First of all, It helps us enhance our health.</div>
+                    <div>e. Also, when we play sports, it helps us promote our friendship.</div>
+                </div>
+                <div class="options">
+                    <div class="option" data-value="A">A. b-d-e-a-c</div>
+                    <div class="option" data-value="B">B. b-c-a-e-d</div>
+                    <div class="option" data-value="C">C. b-e-d-a-c</div>
+                    <div class="option" data-value="D">D. b-a-d-e-c</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 48 -->
+            <div class="question" id="q48">
+                <div class="question-number">Question 10:</div>
+                <div style="margin-bottom: 10px; font-style: italic;">
+                    <div>a. Also, you can also make new friends through this platform. When you connect with people from all over the world, it opens doors to learning about new cultures, values and traditions from different countries.</div>
+                    <div>b. In addition to this, it is also a great source of information and news. It helps in staying updated with the latest happenings in the world and subscribing to popular fan pages to get the latest updates.</div>
+                    <div>c. Firstly, Most importantly, it allows you to get in touch with people from the other side of the world without spending a penny. It is also a great way to connect with old school friends and college friends.</div>
+                    <div>d. Last but not least, You can get great opportunities for employment through social media too.</div>
+                    <div>e. When we look at the positive aspect of the facebook, we find numerous benefits.</div>
+                </div>
+                <div class="options">
+                    <div class="option" data-value="A">A. e-a-c-b-d</div>
+                    <div class="option" data-value="B">B. c-e-a-b-d</div>
+                    <div class="option" data-value="C">C. c-a-b-d-e</div>
+                    <div class="option" data-value="D">D. e-c-a-b-d</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Phần V: Reading Comprehension -->
+        <div class="section">
+            <div class="section-title">V. Reading Comprehension</div>
+            
+            <!-- Passage 2 -->
+            <div style="margin-bottom: 25px; padding: 15px; background-color: #f0f8ff; border-radius: 5px;">
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">BUILDING FRIENDSHIP THROUGH SPORTS</h3>
+                <p style="margin-bottom: 15px;">The ASEAN School Games (ASG) is an annual sports event for schools in ASEAN. It is organised with the support of the ASEAN Schools Sports Council (ASSC) - a (1) _______ organisation that promotes sports among member countries. Before 2009, the games were (2) _______ as a series of single sports events in the region. This was changed in 2009 when a new games format was introduced. The 1st ASG, planned under the new games format, took place in Thailand.</p>
+                <p style="margin-bottom: 15px;">The event attracts thousands of secondary school student athletes and other (3) _______ from ASEAN countries. So far, 20 sports have been held in the ASG, including athletics, swimming, badminton, volleyball, sepak takraw, table tennis, and basketball.</p>
+                <p>The ASG provides opportunities (4) _______ school athletes to show their sporting talents and interact with their peers. The event is also a great way to promote (5) _______ and cultural exchange among students in the Southeast Asian region.</p>
+            </div>
+            
+            <!-- Câu 49 -->
+            <div class="question" id="q49">
+                <div class="question-number">1. A. cultural B. international C. region D. regional</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. cultural</div>
+                    <div class="option" data-value="B">B. international</div>
+                    <div class="option" data-value="C">C. region</div>
+                    <div class="option" data-value="D">D. regional</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 50 -->
+            <div class="question" id="q50">
+                <div class="question-number">2. A. built B. guided C. played D. placed</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. built</div>
+                    <div class="option" data-value="B">B. guided</div>
+                    <div class="option" data-value="C">C. played</div>
+                    <div class="option" data-value="D">D. placed</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 51 -->
+            <div class="question" id="q51">
+                <div class="question-number">3. A. teachers B. representatives C. leaders D. relations</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. teachers</div>
+                    <div class="option" data-value="B">B. representatives</div>
+                    <div class="option" data-value="C">C. leaders</div>
+                    <div class="option" data-value="D">D. relations</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 52 -->
+            <div class="question" id="q52">
+                <div class="question-number">4. A. of B. with C. for D. at</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. of</div>
+                    <div class="option" data-value="B">B. with</div>
+                    <div class="option" data-value="C">C. for</div>
+                    <div class="option" data-value="D">D. at</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 53 -->
+            <div class="question" id="q53">
+                <div class="question-number">5. A. friendship B. teamwork C. development D. contribution</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. friendship</div>
+                    <div class="option" data-value="B">B. teamwork</div>
+                    <div class="option" data-value="C">C. development</div>
+                    <div class="option" data-value="D">D. contribution</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Passage 3 -->
+            <div style="margin: 30px 0 25px 0; padding: 15px; background-color: #f0f8ff; border-radius: 5px;">
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">EFFECTS OF THE GENERATION GAP</h3>
+                <p style="margin-bottom: 15px;">The generation gap can create many negative consequences. Older generations often experience stress and anxiety as they fail to (1) _______ younger ones. Old people also feel no longer needed or wanted, and less (2) _______ in their abilities to use technology. Younger generations, on the other hand, don't feel very (3) _______ with the traditional culture and values of their parents and grandparents. They want to make their own decisions and create their own future without following (4) _______ their parents' footsteps. They also highly (5) _______ the relationship with their peers, and peer groups play an important role in their life. They feel bad when they disappoint their parents.</p>
+            </div>
+            
+            <!-- Câu 54 -->
+            <div class="question" id="q54">
+                <div class="question-number">1. A. understand B. protect C. control D. manage</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. understand</div>
+                    <div class="option" data-value="B">B. protect</div>
+                    <div class="option" data-value="C">C. control</div>
+                    <div class="option" data-value="D">D. manage</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 55 -->
+            <div class="question" id="q55">
+                <div class="question-number">2. A. attractive B. confident C. useful D. practical</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. attractive</div>
+                    <div class="option" data-value="B">B. confident</div>
+                    <div class="option" data-value="C">C. useful</div>
+                    <div class="option" data-value="D">D. practical</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 56 -->
+            <div class="question" id="q56">
+                <div class="question-number">3. A. valued B. curious C. connected D. worried</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. valued</div>
+                    <div class="option" data-value="B">B. curious</div>
+                    <div class="option" data-value="C">C. connected</div>
+                    <div class="option" data-value="D">D. worried</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 57 -->
+            <div class="question" id="q57">
+                <div class="question-number">4. A. to B. with C. for D. in</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. to</div>
+                    <div class="option" data-value="B">B. with</div>
+                    <div class="option" data-value="C">C. for</div>
+                    <div class="option" data-value="D">D. in</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 58 -->
+            <div class="question" id="q58">
+                <div class="question-number">5. A. value B. understand C. create D. improve</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. value</div>
+                    <div class="option" data-value="B">B. understand</div>
+                    <div class="option" data-value="C">C. create</div>
+                    <div class="option" data-value="D">D. improve</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Passage 4 -->
+            <div style="margin: 30px 0 25px 0; padding: 15px; background-color: #f0f8ff; border-radius: 5px;">
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">What are digital generations?</h3>
+                <p style="margin-bottom: 15px;">You can look at it from (1) _______ viewpoints. As a singular view, a digital generation can be considered as encompassing only people (2) _______ were born into or raised in the digital era, meaning with widespread (3) _______ to modern-age technology such as smartphones, tablets, computers, and digital information like the internet.</p>
+                <p style="margin-bottom: 15px;">Authors David Buckingham and Rebekah Willett penned a book, "Digital Generations," that hones in on this premise and explores both the dangers and opportunities technology holds for these generations. (4) _______, the term digital generation was also adopted for an NPR series that explores how different generations and communities engage with technology.</p>
+                <p>However, for this overview, we prefer the viewpoint that every living person today can be considered part of a digital generation, because --- no matter how much we engage with technology --- we are living in a digital-first world. This inclusive perspective recognizes that technology pervades every (5) _______ of modern life, influencing everyone regardless of their age or familiarity with digital tools.</p>
+            </div>
+            
+            <!-- Câu 59 -->
+            <div class="question" id="q59">
+                <div class="question-number">1. A. another B. every C. much D. several</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. another</div>
+                    <div class="option" data-value="B">B. every</div>
+                    <div class="option" data-value="C">C. much</div>
+                    <div class="option" data-value="D">D. several</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 60 -->
+            <div class="question" id="q60">
+                <div class="question-number">2. A. who B. whom C. which D. whose</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. who</div>
+                    <div class="option" data-value="B">B. whom</div>
+                    <div class="option" data-value="C">C. which</div>
+                    <div class="option" data-value="D">D. whose</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 61 -->
+            <div class="question" id="q61">
+                <div class="question-number">3. A. interact B. access C. contribute D. communicate</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. interact</div>
+                    <div class="option" data-value="B">B. access</div>
+                    <div class="option" data-value="C">C. contribute</div>
+                    <div class="option" data-value="D">D. communicate</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 62 -->
+            <div class="question" id="q62">
+                <div class="question-number">4. A. However B. Therefore C. Moreover D. Although</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. However</div>
+                    <div class="option" data-value="B">B. Therefore</div>
+                    <div class="option" data-value="C">C. Moreover</div>
+                    <div class="option" data-value="D">D. Although</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 63 -->
+            <div class="question" id="q63">
+                <div class="question-number">5. A. aspect B. industry C. transport D. conflict</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. aspect</div>
+                    <div class="option" data-value="B">B. industry</div>
+                    <div class="option" data-value="C">C. transport</div>
+                    <div class="option" data-value="D">D. conflict</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Passage 5 -->
+            <div style="margin: 30px 0 25px 0; padding: 15px; background-color: #f0f8ff; border-radius: 5px;">
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">Vaccines</h3>
+                <p style="margin-bottom: 15px;">Vaccines cannot treat diseases caused by viruses, but they can help (1) _______ the spread of disease. Vaccines contain viruses which are weakened or organisms, and help the body's immune system make substances called antibiotics, which fight diseases. If the same virus enters our body later on, the immune system will (2) _______ it and will know how to fight it off.</p>
+                <p style="margin-bottom: 15px;">Giving people vaccines can (3) _______ a lot of lives. For example, two million people died of smallpox in 1967. (4) _______, vaccines helped to stop this disease and made it disappear. Most recently, vaccines have played an important role (5) _______ reducing deaths and severe illness caused by Covid-19 all over the world.</p>
+            </div>
+            
+            <!-- Câu 64 -->
+            <div class="question" id="q64">
+                <div class="question-number">1. A. prevent B. increase C. treat D. improve</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. prevent</div>
+                    <div class="option" data-value="B">B. increase</div>
+                    <div class="option" data-value="C">C. treat</div>
+                    <div class="option" data-value="D">D. improve</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 65 -->
+            <div class="question" id="q65">
+                <div class="question-number">2. A. recognise B. forget C. avoid D. stop</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. recognise</div>
+                    <div class="option" data-value="B">B. forget</div>
+                    <div class="option" data-value="C">C. avoid</div>
+                    <div class="option" data-value="D">D. stop</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 66 -->
+            <div class="question" id="q66">
+                <div class="question-number">3. A. burn B. adapt C. save D. produce</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. burn</div>
+                    <div class="option" data-value="B">B. adapt</div>
+                    <div class="option" data-value="C">C. save</div>
+                    <div class="option" data-value="D">D. produce</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 67 -->
+            <div class="question" id="q67">
+                <div class="question-number">4. A. Besides B. However C. Therefore D. Next</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Besides</div>
+                    <div class="option" data-value="B">B. However</div>
+                    <div class="option" data-value="C">C. Therefore</div>
+                    <div class="option" data-value="D">D. Next</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 68 -->
+            <div class="question" id="q68">
+                <div class="question-number">5. A. with B. to C. on D. in</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. with</div>
+                    <div class="option" data-value="B">B. to</div>
+                    <div class="option" data-value="C">C. on</div>
+                    <div class="option" data-value="D">D. in</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Phần VI: Error Correction -->
+        <div class="section">
+            <div class="section-title">VI. Mark the letter A, B, C, or D to indicate the underlined part that needs correction</div>
+            
+            <!-- Câu 69 -->
+            <div class="question" id="q69">
+                <div class="question-number">1. Tom <u>sounded</u> <u>angrily</u> when I <u>spoke</u> to him <u>on the phone</u>.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. spoke</div>
+                    <div class="option" data-value="B">B. angrily</div>
+                    <div class="option" data-value="C">C. on the phone</div>
+                    <div class="option" data-value="D">D. sounded</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 70 -->
+            <div class="question" id="q70">
+                <div class="question-number">2. <u>Many people</u> feel <u>exciting</u> <u>about</u> the prospect of <u>flying cars</u>.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Many people</div>
+                    <div class="option" data-value="B">B. about</div>
+                    <div class="option" data-value="C">C. exciting</div>
+                    <div class="option" data-value="D">D. flying cars</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 71 -->
+            <div class="question" id="q71">
+                <div class="question-number">3. <u>Although</u> the dish <u>became</u> <u>good</u>, he refused to eat saying that he <u>was</u> not hungry.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Although</div>
+                    <div class="option" data-value="B">B. good</div>
+                    <div class="option" data-value="C">C. was</div>
+                    <div class="option" data-value="D">D. became</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 72 -->
+            <div class="question" id="q72">
+                <div class="question-number">4. It <u>is believed</u> that <u>computer-controlled</u> transport systems <u>seem</u> <u>interested</u> nowadays.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. interested</div>
+                    <div class="option" data-value="B">B. computer-controlled</div>
+                    <div class="option" data-value="C">C. is believed</div>
+                    <div class="option" data-value="D">D. seem</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 73 -->
+            <div class="question" id="q73">
+                <div class="question-number">5. I <u>feel</u> (A) both <u>excited</u> (B) and <u>nervously</u> (C) because I have a <u>date with</u> (D) Lara tomorrow.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. feel</div>
+                    <div class="option" data-value="B">B. excited</div>
+                    <div class="option" data-value="C">C. nervously</div>
+                    <div class="option" data-value="D">D. date with</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 74 -->
+            <div class="question" id="q74">
+                <div class="question-number">6. <u>Encouraging</u> (A) by <u>our teacher</u> (B), we <u>started</u> (C) some <u>environment</u> (D) projects.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Encouraging</div>
+                    <div class="option" data-value="B">B. our teacher</div>
+                    <div class="option" data-value="C">C. started</div>
+                    <div class="option" data-value="D">D. environment</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 75 -->
+            <div class="question" id="q75">
+                <div class="question-number">7. His job (A) <u>involves</u> (B) <u>to translate</u> documents (C) <u>about</u> ASEAN (D) <u>events</u>.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. involves</div>
+                    <div class="option" data-value="B">B. to translate</div>
+                    <div class="option" data-value="C">C. about</div>
+                    <div class="option" data-value="D">D. events</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 76 -->
+            <div class="question" id="q76">
+                <div class="question-number">8. <u>Saw</u> (A) the <u>forest fire</u> (B), the children <u>immediately</u> (C) <u>called</u> (D) the police.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Saw</div>
+                    <div class="option" data-value="B">B. forest fire</div>
+                    <div class="option" data-value="C">C. immediately</div>
+                    <div class="option" data-value="D">D. called</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 77 -->
+            <div class="question" id="q77">
+                <div class="question-number">9. <u>Using</u> (A) Internet <u>are</u> (B) popular (C) <u>with</u> many people (D) <u>these days</u>.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Using</div>
+                    <div class="option" data-value="B">B. are</div>
+                    <div class="option" data-value="C">C. with</div>
+                    <div class="option" data-value="D">D. these days</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 78 -->
+            <div class="question" id="q78">
+                <div class="question-number">10. The (A) <u>building</u> suddenly (B) <u>fell</u> down, (C) <u>injured</u> two (D) <u>people</u>.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. building</div>
+                    <div class="option" data-value="B">B. fell</div>
+                    <div class="option" data-value="C">C. injured</div>
+                    <div class="option" data-value="D">D. people</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 79 -->
+            <div class="question" id="q79">
+                <div class="question-number">11. <u>Embarrass</u> (A) by all the (B) <u>attention</u>, he (C) <u>thanked</u> (D) <u>everyone</u> for the presents.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Embarrass</div>
+                    <div class="option" data-value="B">B. attention</div>
+                    <div class="option" data-value="C">C. thanked</div>
+                    <div class="option" data-value="D">D. everyone</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 80 -->
+            <div class="question" id="q80">
+                <div class="question-number">12. They (A) <u>congratulated</u> him on (B) <u>get</u> the first prize in the (C) <u>writing</u> competition (D) <u>about</u> ASEAN.</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. congratulated</div>
+                    <div class="option" data-value="B">B. get</div>
+                    <div class="option" data-value="C">C. writing</div>
+                    <div class="option" data-value="D">D. about</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+        </div>
+        
+        <div class="control-panel">
+            <button id="submit-btn">Nộp bài và xem kết quả</button>
+            <button id="reset-btn">Làm lại bài thi</button>
+        </div>
+        
+        <div id="results" class="results">
+            <div class="score">Điểm của bạn: <span id="score-value">0</span>/80</div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="score-detail" id="score-detail">Bạn đã trả lời đúng <span id="correct-count">0</span> trên <span id="total-count">80</span> câu hỏi.</div>
+            <div class="question-stats">
+                <div class="stat">
+                    <span class="stat-number correct-stat" id="correct-stat">0</span>
+                    <span>Câu đúng</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number incorrect-stat" id="incorrect-stat">0</span>
+                    <span>Câu sai</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number unanswered-stat" id="unanswered-stat">80</span>
+                    <span>Chưa trả lời</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Đáp án đúng cho tất cả các câu hỏi
+        const correctAnswers = {
+            // Phần I: Stress Pattern (1-10)
+            q1: "D", q2: "C", q3: "A", q4: "B", q5: "D",
+            q6: "C", q7: "D", q8: "C", q9: "B", q10: "A",
+            
+            // Phần II: Multiple Choice (11-38)
+            q11: "C", q12: "D", q13: "D", q14: "C", q15: "A",
+            q16: "A", q17: "C", q18: "A", q19: "D", q20: "B",
+            q21: "B", q22: "C", q23: "D", q24: "D", q25: "B",
+            q26: "C", q27: "A", q28: "D", q29: "A", q30: "C",
+            q31: "C", q32: "B", q33: "A", q34: "A", q35: "D",
+            q36: "B", q37: "B", q38: "D",
+            
+            // Phần III: Conversation Arrangement (39-44)
+            q39: "A", q40: "D", q41: "C", q42: "B", q43: "A", q44: "C",
+            
+            // Phần IV: Paragraph Arrangement (45-48)
+            q45: "A", q46: "B", q47: "A", q48: "D",
+            
+            // Phần V: Reading Comprehension (49-68)
+            q49: "D", q50: "A", q51: "B", q52: "C", q53: "A",
+            q54: "A", q55: "B", q56: "C", q57: "D", q58: "A",
+            q59: "D", q60: "A", q61: "B", q62: "C", q63: "A",
+            q64: "A", q65: "A", q66: "C", q67: "B", q68: "D",
+            
+            // Phần VI: Error Correction (69-80)
+            q69: "B", q70: "C", q71: "B", q72: "A", q73: "C",
+            q74: "A", q75: "B", q76: "A", q77: "B", q78: "C",
+            q79: "A", q80: "B"
+        };
+        
+        // Lưu trữ câu trả lời của người dùng
+        const userAnswers = {};
+        
+        // Hàm kiểm tra câu trả lời và hiển thị kết quả ngay lập tức
+        function checkAnswer(questionId, selectedValue) {
+            const questionElement = document.getElementById(questionId);
+            const correctAnswer = correctAnswers[questionId];
+            const options = questionElement.querySelectorAll('.option');
+            
+            // Xóa lớp selected từ tất cả các option
+            options.forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Đánh dấu option được chọn
+            const selectedOption = Array.from(options).find(option => option.getAttribute('data-value') === selectedValue);
+            if (selectedOption) {
+                selectedOption.classList.add('selected');
+            }
+            
+            // Kiểm tra đúng/sai
+            const isCorrect = selectedValue === correctAnswer;
+            
+            // Đánh dấu màu cho các option
+            options.forEach(option => {
+                const optionValue = option.getAttribute('data-value');
+                if (optionValue === correctAnswer) {
+                    option.classList.add('correct');
+                } else if (optionValue === selectedValue && !isCorrect) {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            // Hiển thị phản hồi
+            const feedbackElement = questionElement.querySelector('.answer-feedback');
+            if (isCorrect) {
+                feedbackElement.textContent = "Chính xác!";
+                feedbackElement.className = "answer-feedback correct";
+            } else {
+                feedbackElement.textContent = `Sai rồi! Đáp án đúng là: ${correctAnswer}`;
+                feedbackElement.className = "answer-feedback incorrect";
+            }
+            
+            // Lưu câu trả lời của người dùng
+            userAnswers[questionId] = selectedValue;
+            
+            // Đánh dấu câu hỏi đã trả lời
+            questionElement.classList.add('answered');
+            
+            // Cập nhật thống kê
+            updateStats();
+        }
+        
+        // Hàm cập nhật thống kê
+        function updateStats() {
+            let correctCount = 0;
+            let answeredCount = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            
+            // Đếm số câu trả lời đúng và tổng số câu đã trả lời
+            for (const questionId in userAnswers) {
+                answeredCount++;
+                if (userAnswers[questionId] === correctAnswers[questionId]) {
+                    correctCount++;
+                }
+            }
+            
+            // Cập nhật thống kê
+            document.getElementById('correct-stat').textContent = correctCount;
+            document.getElementById('incorrect-stat').textContent = answeredCount - correctCount;
+            document.getElementById('unanswered-stat').textContent = totalQuestions - answeredCount;
+            
+            // Cập nhật thanh tiến trình
+            const progressPercentage = (answeredCount / totalQuestions) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercentage}%`;
+        }
+        
+        // Hàm tính điểm và hiển thị kết quả tổng
+        function showResults() {
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            
+            // Tính điểm
+            for (const questionId in correctAnswers) {
+                if (userAnswers[questionId] === correctAnswers[questionId]) {
+                    score++;
+                }
+            }
+            
+            // Tính phần trăm
+            const percentage = ((score / totalQuestions) * 100).toFixed(1);
+            
+            // Hiển thị kết quả
+            document.getElementById('score-value').textContent = `${score}/${totalQuestions} (${percentage}%)`;
+            document.getElementById('correct-count').textContent = score;
+            document.getElementById('total-count').textContent = totalQuestions;
+            document.getElementById('results').style.display = 'block';
+            
+            // Cuộn đến kết quả
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+            
+            // Cập nhật thống kê cuối cùng
+            updateStats();
+        }
+        
+        // Hàm reset bài thi
+        function resetTest() {
+            // Xóa tất cả các lựa chọn
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Xóa phản hồi
+            const allFeedback = document.querySelectorAll('.answer-feedback');
+            allFeedback.forEach(feedback => {
+                feedback.textContent = '';
+                feedback.className = "answer-feedback";
+            });
+            
+            // Xóa lớp answered
+            const allQuestions = document.querySelectorAll('.question');
+            allQuestions.forEach(question => {
+                question.classList.remove('answered');
+            });
+            
+            // Xóa câu trả lời của người dùng
+            for (const key in userAnswers) {
+                delete userAnswers[key];
+            }
+            
+            // Ẩn kết quả
+            document.getElementById('results').style.display = 'none';
+            
+            // Reset thống kê
+            document.getElementById('correct-stat').textContent = '0';
+            document.getElementById('incorrect-stat').textContent = '0';
+            document.getElementById('unanswered-stat').textContent = Object.keys(correctAnswers).length;
+            document.getElementById('progress-bar').style.width = '0%';
+            
+            // Cuộn lên đầu trang
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Thêm sự kiện click cho tất cả các option
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const questionId = this.closest('.question').id;
+                const selectedValue = this.getAttribute('data-value');
+                checkAnswer(questionId, selectedValue);
+            });
+        });
+        
+        // Thêm sự kiện cho nút nộp bài
+        document.getElementById('submit-btn').addEventListener('click', showResults);
+        
+        // Thêm sự kiện cho nút làm lại
+        document.getElementById('reset-btn').addEventListener('click', resetTest);
+        
+        // Khởi tạo thống kê
+        updateStats();
+    </script>
+</body>
+</html>
