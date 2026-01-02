@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Thi Lịch Sử Lớp 11 - HK1</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section-title {
+            background-color: #2c3e50;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+        
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .question.answered {
+            background-color: #f0f8ff;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .options {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .option {
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .option:hover {
+            background-color: #e9ecef;
+        }
+        
+        .option.selected {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+        }
+        
+        .option.correct {
+            background-color: #d4edda !important;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .option.incorrect {
+            background-color: #f8d7da !important;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .answer-feedback {
+            margin-top: 10px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            display: none;
+        }
+        
+        .answer-feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 3px solid #28a745;
+            display: block;
+        }
+        
+        .answer-feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 3px solid #dc3545;
+            display: block;
+        }
+        
+        .control-panel {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 12px 25px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        #submit-btn {
+            background-color: #27ae60;
+        }
+        
+        #submit-btn:hover {
+            background-color: #219653;
+        }
+        
+        #reset-btn {
+            background-color: #e74c3c;
+        }
+        
+        #reset-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #e8f4fc;
+            border-radius: 5px;
+            border-left: 5px solid #3498db;
+            display: none;
+        }
+        
+        .score {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .score-detail {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+        
+        .progress-container {
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .question-stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .stat {
+            padding: 10px;
+            min-width: 120px;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .correct-stat {
+            color: #27ae60;
+        }
+        
+        .incorrect-stat {
+            color: #e74c3c;
+        }
+        
+        .unanswered-stat {
+            color: #f39c12;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .control-panel {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            button {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .question-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ĐỀ CƯƠNG ÔN TẬP CUỐI HK 1 MÔN LỊCH SỬ LỚP 11</h1>
+            <p>Thời gian làm bài: 90 phút</p>
+        </div>
+        
+        <!-- Chủ đề 2 -->
+        <div class="section">
+            <div class="section-title">CHỦ ĐỀ 2. CHỦ NGHĨA XÃ HỘI TỪ NĂM 1917 ĐẾN NAY</div>
+            
+            <!-- Bài 3 -->
+            <div style="font-weight: bold; color: #2c3e50; margin-bottom: 15px; font-size: 1.1em;">BÀI 3. SỰ HÌNH THÀNH LIÊN BANG CỘNG HÒA XÃ HỘI CHỦ NGHĨA XÔ VIẾT</div>
+            
+            <!-- Câu 1 -->
+            <div class="question" id="q1">
+                <div class="question-number">Câu 1. Thắng lợi nào sau đây dẫn đến sự ra đời của Nhà nước xã hội chủ nghĩa đầu tiên trên thế giới?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Cách mạng tháng Hai (1917) ở Nga.</div>
+                    <div class="option" data-value="B">B. Cách mạng tháng Mười Nga (1917).</div>
+                    <div class="option" data-value="C">C. Cách mạng Nga năm 1905 - 1907.</div>
+                    <div class="option" data-value="D">D. Công xã Pa-ri năm 1871 ở Pháp.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 2 -->
+            <div class="question" id="q2">
+                <div class="question-number">Câu 2. Sau Cách mạng tháng Mười Nga, nhiệm vụ hàng đầu của chính quyền Xô viết là</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. đập tan bộ máy nhà nước cũ, xây dựng bộ máy nhà nước mới.</div>
+                    <div class="option" data-value="B">B. hàn gắn vết thương chiến tranh, khôi phục và phát triển kinh tế.</div>
+                    <div class="option" data-value="C">C. khôi phục và phát triển kinh tế, chống lại thù trong giặc ngoài.</div>
+                    <div class="option" data-value="D">D. tiến hành công nghiệp hóa, hiện đại hóa tiến lên chủ nghĩa xã hội.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 3 -->
+            <div class="question" id="q3">
+                <div class="question-number">Câu 3. Đập tan bộ máy nhà nước cũ, xây dựng bộ máy nhà nước mới của những người lao động được xem là</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. nhiệm vụ chiến lược của chính quyền Xô viết.</div>
+                    <div class="option" data-value="B">B. mục tiêu trước mắt của chính quyền Xô viết.</div>
+                    <div class="option" data-value="C">C. nhiệm vụ hàng đầu của chính quyền Xô viết.</div>
+                    <div class="option" data-value="D">D. mục tiêu hàng đầu của chính quyền Xô viết.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 4 -->
+            <div class="question" id="q4">
+                <div class="question-number">Câu 4. Sau Cách mạng tháng Mười Nga năm 1917, người đứng đầu Chính quyền Xô viết là</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Lê-nin.</div>
+                    <div class="option" data-value="B">B. Xta-lin.</div>
+                    <div class="option" data-value="C">C. Pu-tin.</div>
+                    <div class="option" data-value="D">D. Goóc-ba-chốp.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 5 -->
+            <div class="question" id="q5">
+                <div class="question-number">Câu 5. Đại hội Xô viết toàn Nga lần thứ hai, khai mạc đêm 25-10-1917 đã ra tuyên bố</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. thành lập chính quyền Xô viết.</div>
+                    <div class="option" data-value="B">B. thông qua sắc lệnh "Hòa bình".</div>
+                    <div class="option" data-value="C">C. thông qua sắc lệnh "Ruộng đất".</div>
+                    <div class="option" data-value="D">D. Thông qua chính sách "Kinh tế mới".</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 6 -->
+            <div class="question" id="q6">
+                <div class="question-number">Câu 6. Khi mới thành lập, Liên bang Cộng hòa xã hội chủ nghĩa Xô viết gồm 4 nước Cộng hòa là</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Nga, U-crai-na, Bê-lô-rút-xi-a và Ngoại Cáp-ca-dơ.</div>
+                    <div class="option" data-value="B">B. Nga, Hung-ga-ri, Bê-lô-rút-xi-a và Ngoại Cáp-ca-dơ.</div>
+                    <div class="option" data-value="C">C. Nga, Hung-ga-ri, Bung-ra-ri và Ngoại Cáp-ca-dơ.</div>
+                    <div class="option" data-value="D">D. Liên Xô, Hung-ga-ri, Bung-ra-ri và Ngoại Cáp-ca-dơ.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 7 -->
+            <div class="question" id="q7">
+                <div class="question-number">Câu 7. Ngày 30-12-1922, Đại hội lần thứ nhất các Xô viết toàn Liên bang đã thông qua bản Tuyên ngôn thành lập Liên bang cộng hoà xã hội chủ nghĩa Xô Viết tại</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Mát-xcơ-va.</div>
+                    <div class="option" data-value="B">B. Xta-ling-grát.</div>
+                    <div class="option" data-value="C">C. Pê-tơ-rô-grat.</div>
+                    <div class="option" data-value="D">D. Điện Xmô-nưi.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 8 -->
+            <div class="question" id="q8">
+                <div class="question-number">Câu 8. Tháng 1-1924, bản Hiến pháp đầu tiên của Liên Xô chính thức được</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. thông qua.</div>
+                    <div class="option" data-value="B">B. biên soạn.</div>
+                    <div class="option" data-value="C">C. xoá bỏ.</div>
+                    <div class="option" data-value="D">D. có hiệu lực.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 9 -->
+            <div class="question" id="q9">
+                <div class="question-number">Câu 9. Ngày 30-12-1922, Đại hội lần thứ nhất các Xô viết toàn Liên bang đã thông qua</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Tuyên ngôn thành lập Cộng hòa xã hội chủ nghĩa Xô viết.</div>
+                    <div class="option" data-value="B">B. Hiến pháp đầu tiến của Cộng hòa xã hội chủ nghĩa Xô viết.</div>
+                    <div class="option" data-value="C">C. Cương lĩnh xây dựng đất nước tiến lên chủ nghĩa xã hội.</div>
+                    <div class="option" data-value="D">D. Báo cáo chính trị và báo cáo sửa đổi điều lệ Đảng Cộng sản.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 10 -->
+            <div class="question" id="q10">
+                <div class="question-number">Câu 10. Tháng 1-1924, Liên Xô đã thông qua</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. bản Hiệp ước Liên bang.</div>
+                    <div class="option" data-value="B">B. bản Hiến pháp đầu tiên.</div>
+                    <div class="option" data-value="C">C. chính sách "kinh tế mới".</div>
+                    <div class="option" data-value="D">D. Sắc lệnh "hòa bình".</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 11 -->
+            <div class="question" id="q11">
+                <div class="question-number">Câu 11. Sự kiện nào sau đây được xem là mở đường cho sự ra đời Liên bang Cộng hòa xã hội chủ nghĩa Xô viết?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Cách mạng tháng Hai năm 1917 ở Nga.</div>
+                    <div class="option" data-value="B">B. Cách mạng tháng Mười Nga năm 1917.</div>
+                    <div class="option" data-value="C">C. Cách mạng Nga năm 1905 - 1907.</div>
+                    <div class="option" data-value="D">D. Chiến tranh thế giới thứ nhất (1914).</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 12 -->
+            <div class="question" id="q12">
+                <div class="question-number">Câu 12. Theo Hiến pháp (1924) của Liên Xô, ghi nhận việc hợp tác của các nước Cộng hòa Xô viết thành một nhà nước dựa trên cơ sở</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. thỏa thuận.</div>
+                    <div class="option" data-value="B">B. tự nguyện.</div>
+                    <div class="option" data-value="C">C. bắt buộc.</div>
+                    <div class="option" data-value="D">D. thương lượng.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 13 -->
+            <div class="question" id="q13">
+                <div class="question-number">Câu 13. Một trong những tư tưởng chỉ đạo của Lê-nin trong việc thành lập Liên bang Cộng hòa xã hội chủ nghĩa Xô viết năm 1922 là</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. quyền dân tộc tự quyết.</div>
+                    <div class="option" data-value="B">B. phân biệt về tôn giáo.</div>
+                    <div class="option" data-value="C">C. thống nhất về văn hóa.</div>
+                    <div class="option" data-value="D">D. phân biệt về chủng tộc.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 14 -->
+            <div class="question" id="q14">
+                <div class="question-number">Câu 14. Sự kiện nào sau đây đánh dấu hoàn thành quá trình thành lập Nhà nước Liên bang Cộng hòa xã hội chủ nghĩa đầu tiên trên thế giới?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. bản Hiến pháp đầu tiên của Liên Xô được thông qua.</div>
+                    <div class="option" data-value="B">B. bản Hiệp ước Liên bang lần đầu tiên được thông qua.</div>
+                    <div class="option" data-value="C">C. Thắng lợi trong đấu tranh chống thù trong, giặc ngoài.</div>
+                    <div class="option" data-value="D">D. Khi hoàn thành quá trình khôi phục và phát triển kinh tế.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 15 -->
+            <div class="question" id="q15">
+                <div class="question-number">Câu 15. Nguyên nhân quan trọng dẫn đến thắng lợi của các nước Cộng hòa xã hội chủ nghĩa trên đất nước Xô viết trong cuộc chiến chống thù trong, giặc ngoài là</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. sự đoàn kết, giúp đỡ nhau.</div>
+                    <div class="option" data-value="B">B. sự ủng hộ từ bên ngoài.</div>
+                    <div class="option" data-value="C">C. có sức mạnh về ngoại giao.</div>
+                    <div class="option" data-value="D">D. có sự ủng hộ của Mỹ.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 16 -->
+            <div class="question" id="q16">
+                <div class="question-number">Câu 16. Hiến pháp (1924) của Liên Xô phản ánh con đường giải quyết vấn đề dân tộc trong một quốc gia nhiều dân tộc, trên cơ sở nguyên tắc</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. bình đẳng và tình hữu nghị giữa các dân tộc.</div>
+                    <div class="option" data-value="B">B. cạnh tranh và hợp tác về kinh tế giữa các dân tộc.</div>
+                    <div class="option" data-value="C">C. tôn trọng chủ quyền lãnh thổ giữa các dân tộc.</div>
+                    <div class="option" data-value="D">D. không can thiệp vào công việc nội bộ của nhau.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 17 -->
+            <div class="question" id="q17">
+                <div class="question-number">Câu 17. Trong những năm 1918 - 1921, nhân dân Nga Xô viết đã tiến hành</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. chính sách kinh tế mới do Lê-nin soạn thảo.</div>
+                    <div class="option" data-value="B">B. xây dựng cơ sở vật chất của chủ nghĩa xã hội.</div>
+                    <div class="option" data-value="C">C. cuộc chiến đấu chống thù trong, giặc ngoài.</div>
+                    <div class="option" data-value="D">D. tiến hành Chiến tranh Vệ quốc chống lại phát xít Đức.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 18 -->
+            <div class="question" id="q18">
+                <div class="question-number">Câu 18. Sự kiện nào dưới đây đánh dấu mốc hoàn thành của quá trình thành lập Nhà nước Liên bang Cộng hòa xã hội chủ nghĩa Xô viết?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Nước Nga Xô viết thực hiện chính sách kinh tế mới (tháng 3/1921).</div>
+                    <div class="option" data-value="B">B. Bản Hiệp ước Liên bang được thông qua (tháng 12/1922).</div>
+                    <div class="option" data-value="C">C. Tuyên ngôn thành lập Liên bang Xô viết được thông qua (tháng 12/1922).</div>
+                    <div class="option" data-value="D">D. Bản Hiến pháp đầu tiên của Liên Xô được thông qua (tháng 1/1924).</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 19 -->
+            <div class="question" id="q19">
+                <div class="question-number">Câu 19. Mục tiêu của việc thành lập Nhà nước Liên bang Cộng hòa xã hội chủ nghĩa Xô viết là</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. chống lại sự tấn công của 14 nước đế quốc.</div>
+                    <div class="option" data-value="B">B. thực hiện hiệu quả Chính sách Kinh tế mới.</div>
+                    <div class="option" data-value="C">C. hợp tác, giúp đỡ lẫn nhau để cùng phát triển.</div>
+                    <div class="option" data-value="D">D. chống lại cuộc tấn công của phát xít Đức.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 20 -->
+            <div class="question" id="q20">
+                <div class="question-number">Câu 20. Đối với Liên Xô, sự ra đời của Liên bang Cộng hoà xã hội chủ nghĩa Xô viết không có ý nghĩa nào sau đây?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Thể hiện sức mạnh đoàn kết, giúp đỡ nhau giữa các dân tộc Xô viết.</div>
+                    <div class="option" data-value="B">B. Phù hợp với lợi ích chung của các dân tộc trên đất nước Xô viết.</div>
+                    <div class="option" data-value="C">C. Tăng cường vị thế của Nhà nước Liên Xô trên trường quốc tế.</div>
+                    <div class="option" data-value="D">D. Tạo tiền đề cho sự ra đời của hệ thống xã hội chủ nghĩa trên thế giới.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 21 -->
+            <div class="question" id="q21">
+                <div class="question-number">Câu 21. Đối với Liên Xô, sự ra đời của Liên bang Cộng hoà xã hội chủ nghĩa Xô viết không có ý nghĩa nào sau đây?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Thể hiện sức mạnh đoàn kết, giúp đỡ nhau giữa các dân tộc Xô viết.</div>
+                    <div class="option" data-value="B">B. Phù hợp với lợi ích chung của các dân tộc trên đất nước Xô viết.</div>
+                    <div class="option" data-value="C">C. Tăng cường vị thế của Nhà nước Liên Xô trên trường quốc tế.</div>
+                    <div class="option" data-value="D">D. Trở thành biểu tượng và chỗ dựa cho phong trào cách mạng thế giới.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 22 -->
+            <div class="question" id="q22">
+                <div class="question-number">Câu 22. Đối với Liên Xô, sự ra đời của Liên bang Cộng hoà xã hội chủ nghĩa Xô viết không có ý nghĩa nào sau đây?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Thể hiện sức mạnh đoàn kết, giúp đỡ nhau giữa các dân tộc Xô viết.</div>
+                    <div class="option" data-value="B">B. Phù hợp với lợi ích chung của các dân tộc trên đất nước Xô viết.</div>
+                    <div class="option" data-value="C">C. Tăng cường vị thế của Nhà nước Liên Xô trên trường quốc tế.</div>
+                    <div class="option" data-value="D">D. Cổ vũ mạnh mẽ phong trào giải phóng dân tộc ở Á, Phi, khu vực Mỹ-La tinh.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 23 -->
+            <div class="question" id="q23">
+                <div class="question-number">Câu 23. Đối với quốc tế, sự ra đời của Liên bang Cộng hoà xã hội chủ nghĩa Xô viết không có ý nghĩa nào sau đây?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Thể hiện sức mạnh tình đoàn kết, hợp tác, giúp đỡ nhau giữa các dân tộc Nga.</div>
+                    <div class="option" data-value="B">B. Cổ vũ mạnh mẽ phong trào giải phóng dân tộc ở Á, Phi, Mỹ La-tinh.</div>
+                    <div class="option" data-value="C">C. Tạo tiền đề cho sự ra đời của hệ thống xã hội chủ nghĩa trên thế giới.</div>
+                    <div class="option" data-value="D">D. Trở thành biểu tượng và chỗ dựa cho phong trào cách mạng thế giới.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 24 -->
+            <div class="question" id="q24">
+                <div class="question-number">Câu 24. Đối với quốc tế, sự ra đời của Liên bang Cộng hoà xã hội chủ nghĩa Xô viết không có ý nghĩa nào sau đây?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Phù hợp với lợi ích chung của các dân tộc trên đất nước Xô viết.</div>
+                    <div class="option" data-value="B">B. Cổ vũ mạnh mẽ phong trào giải phóng dân tộc ở Á, Phi, Mỹ La-tinh.</div>
+                    <div class="option" data-value="C">C. Tạo tiền đề cho sự ra đời của hệ thống xã hội chủ nghĩa trên thế giới.</div>
+                    <div class="option" data-value="D">D. Trở thành biểu tượng và chỗ dựa cho phong trào cách mạng thế giới.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 25 -->
+            <div class="question" id="q25">
+                <div class="question-number">Câu 25. Nội dung nào sau đây không phải là tư tưởng chỉ đạo của Lê-nin trong việc thành lập Liên bang Cộng hoà xã hội chủ nghĩa Xô viết?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Sự bình đẳng về mọi mặt giữa các dân tộc.</div>
+                    <div class="option" data-value="B">B. Quyền dân tộc tự quyết của các dân tộc.</div>
+                    <div class="option" data-value="C">C. Xây dựng một cộng đồng anh em giữa các dân tộc.</div>
+                    <div class="option" data-value="D">D. Xây dựng nền chuyên chính dân chủ tư sản.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 26 -->
+            <div class="question" id="q26">
+                <div class="question-number">Câu 26. Nội dung nào sau đây phản ánh không đúng ý nghĩa sự ra đời Liên bang Cộng hoà xã hội chủ nghĩa Xô viết?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Thể hiện sức mạnh đoàn kết, giúp đỡ nhau giữa các dân tộc Xô viết.</div>
+                    <div class="option" data-value="B">B. Phù hợp với lợi ích chung của các dân tộc trên đất nước Xô viết.</div>
+                    <div class="option" data-value="C">C. Tăng cường vị thế của Nhà nước Liên Xô trên trường quốc tế.</div>
+                    <div class="option" data-value="D">D. Đánh dấu chủ nghĩa xã hội được mở rộng về không gian, vùng địa lý.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 27 -->
+            <div class="question" id="q27">
+                <div class="question-number">Câu 27. Nội dung nào sau đây phản ánh đúng sự ra đời của Liên bang Cộng hòa xã hội chủ nghĩa Xô viết (Liên Xô) năm 1922?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Phù hợp với lợi ích chung của các dân tộc trên đất nước Xô viết.</div>
+                    <div class="option" data-value="B">B. Phù hợp với xu thế phát triển chung của thế giới lúc bấy giờ.</div>
+                    <div class="option" data-value="C">C. Đáp ứng được nhiệm vụ cấp bách trong đấu tranh chống ngoại xâm.</div>
+                    <div class="option" data-value="D">D. Chưa phù hợp với nguyện vọng các dân tộc trên đất nước Xô viết.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 28 -->
+            <div class="question" id="q28">
+                <div class="question-number">Câu 28. Nội dung nào sau đây phản ánh đúng ý nghĩa quốc tế từ sự ra đời của Liên bang Cộng hoà xã hội chủ nghĩa Xô viết?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Làm thất bại ý đồ và hành động chia rẽ của các thế lực thù địch.</div>
+                    <div class="option" data-value="B">B. Cổ vũ phong trào giải phóng dân tộc của các nước thuộc địa.</div>
+                    <div class="option" data-value="C">C. Củng cố và tăng cường vị thế của Liên Xô trên trường quốc tế.</div>
+                    <div class="option" data-value="D">D. Tạo điều kiện để các nước cộng hòa phát triển kinh tế - xã hội.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Bài 4 -->
+            <div style="font-weight: bold; color: #2c3e50; margin: 25px 0 15px 0; font-size: 1.1em;">BÀI 4. SỰ PHÁT TRIỂN CỦA CHỦ NGHĨA XÃ HỘI TỪ SAU CHIẾN TRANH THẾ GIỚI THỨ HAI ĐẾN NAY</div>
+            
+            <!-- Câu 29 -->
+            <div class="question" id="q29">
+                <div class="question-number">Câu 29. Thắng lợi của Hồng quân Liên Xô đã tạo điều kiện cho sự ra đời của nhà nước dân chủ nhân dân ở các nước</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Đông Âu.</div>
+                    <div class="option" data-value="B">B. Tây Âu.</div>
+                    <div class="option" data-value="C">C. Nam Âu.</div>
+                    <div class="option" data-value="D">D. Bắc Âu.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 30 -->
+            <div class="question" id="q30">
+                <div class="question-number">Câu 30. Năm 1949, quốc gia nào sau đây đã lựa chọn con đường đi lên chủ nghĩa xã hội?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Trung Quốc.</div>
+                    <div class="option" data-value="B">B. Việt Nam.</div>
+                    <div class="option" data-value="C">C. Triều Tiên.</div>
+                    <div class="option" data-value="D">D. Cu-ba.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 31 -->
+            <div class="question" id="q31">
+                <div class="question-number">Câu 31. Tháng 12-1978, gắn với sự kiện trọng đại nào ở Trung Quốc?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Xây dựng chủ nghĩa xã hội.</div>
+                    <div class="option" data-value="B">B. Xây dựng chủ nghĩa tư bản.</div>
+                    <div class="option" data-value="C">C. Xây dựng dân giàu, nước mạnh.</div>
+                    <div class="option" data-value="D">D. Thực hiện cải cách mở cửa.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 32 -->
+            <div class="question" id="q32">
+                <div class="question-number">Câu 32. Từ năm 1945 đến giữa những năm 70 của thế kỉ XX, quốc gia nào sau đây thực hiện chính sách giúp đỡ các nước xã hội chủ nghĩa?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Anh.</div>
+                    <div class="option" data-value="B">B. Bru-nây.</div>
+                    <div class="option" data-value="C">C. Liên Xô.</div>
+                    <div class="option" data-value="D">D. Mĩ.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 33 -->
+            <div class="question" id="q33">
+                <div class="question-number">Câu 33. Quốc gia nào sau đây không lựa chọn con đường đi lên chủ nghĩa xã hội từ 1945 đến những năm 70 của thế kỉ XX?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Cu-ba.</div>
+                    <div class="option" data-value="B">B. Hàn Quốc.</div>
+                    <div class="option" data-value="C">C. Ba Lan.</div>
+                    <div class="option" data-value="D">D. Lào.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 34 -->
+            <div class="question" id="q34">
+                <div class="question-number">Câu 34. Từ những năm 80 của thế kỉ XX, các nước Đông Âu lâm vào thời kì suy thoái, khủng hoảng trầm trọng về</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. văn hóa, giáo.</div>
+                    <div class="option" data-value="B">B. chính trị, quân sự.</div>
+                    <div class="option" data-value="C">C. quốc phòng an ninh.</div>
+                    <div class="option" data-value="D">D. kinh tế, xã hội.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 35 -->
+            <div class="question" id="q35">
+                <div class="question-number">Câu 35. Năm 2010, quốc gia nào sau đây có nền kinh tế đứng thứ hai thế giới?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Hàn Quốc.</div>
+                    <div class="option" data-value="B">B. Triều Tiên.</div>
+                    <div class="option" data-value="C">C. Việt Nam.</div>
+                    <div class="option" data-value="D">D. Trung Quốc.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 36 -->
+            <div class="question" id="q36">
+                <div class="question-number">Câu 36. Những thành tựu trong công cuộc cải cách mở cửa của Trung Quốc cho thấy sự đúng đắn của con đường xây dựng</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. chủ nghĩa xã hội.</div>
+                    <div class="option" data-value="B">B. chủ nghĩa dân tộc.</div>
+                    <div class="option" data-value="C">C. chủ nghĩa yêu nước.</div>
+                    <div class="option" data-value="D">D. chủ nghĩa cơ hội.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 37 -->
+            <div class="question" id="q37">
+                <div class="question-number">Câu 37. Trước Chiến tranh thế giới thứ hai, quốc gia nào sau đây đi theo con đường xã hội chủ nghĩa?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Việt Nam.</div>
+                    <div class="option" data-value="B">B. Liên Xô.</div>
+                    <div class="option" data-value="C">C. Trung Quốc.</div>
+                    <div class="option" data-value="D">D. Cu-ba.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 38 -->
+            <div class="question" id="q38">
+                <div class="question-number">Câu 38. Miền Bắc Việt Nam tiến lên xây dựng chủ nghĩa xã hội sau thắng lợi của</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. cuộc kháng chiến chống thực dân Pháp năm 1954.</div>
+                    <div class="option" data-value="B">B. Hiệp định Pari về Việt Nam được kí kết năm 1973.</div>
+                    <div class="option" data-value="C">C. cuộc kháng chiến chống Mĩ và tay sai năm 1975.</div>
+                    <div class="option" data-value="D">D. quá trình thống nhất hai miền Nam -- Bắc năm 1976.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 39 -->
+            <div class="question" id="q39">
+                <div class="question-number">Câu 39. Sau Chiến tranh thế giới thứ hai, chủ nghĩa xã hội từ phạm vi một nước đã</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. trở thành một hệ thống trên thế giới.</div>
+                    <div class="option" data-value="B">B. trở thành siêu cường số một thế giới.</div>
+                    <div class="option" data-value="C">C. bị xoá bỏ hoàn toàn trên thế giới.</div>
+                    <div class="option" data-value="D">D. lan rộng sang các nước ở Tây Âu.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 40 -->
+            <div class="question" id="q40">
+                <div class="question-number">Câu 40. Nguyên nhân cơ bản dẫn tới sự khủng hoảng và sụp đổ của chủ nghĩa xã hội ở Liên Xô và các nước Đông Âu là do</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. tiến hành cải tổ muộn, gặp khó khăn khi tiến hành cải tổ.</div>
+                    <div class="option" data-value="B">B. không tiến hành cách mạng khoa học -- kĩ thuật hiện đại.</div>
+                    <div class="option" data-value="C">C. đường lối lãnh đạo mang tính chủ quan, duy ý chí.</div>
+                    <div class="option" data-value="D">D. sự chống phá của các thế lực thù địch ở trong nước.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 41 -->
+            <div class="question" id="q41">
+                <div class="question-number">Câu 41. Nguyên nhân khách quan dẫn đến sự khủng hoảng và sụp đổ của chế độ xã hội chủ nghĩa ở Liên Xô và Đông Âu là</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. sự chống phá của các thế lực thù địch.</div>
+                    <div class="option" data-value="B">B. chưa bắt kịp sự phát triển khoa học -- kĩ thuật.</div>
+                    <div class="option" data-value="C">C. thiếu dân chủ và công bằng xã hội.</div>
+                    <div class="option" data-value="D">D. phạm phải nhiều sai lầm khi cải tổ.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 42 -->
+            <div class="question" id="q42">
+                <div class="question-number">Câu 42. Trọng tâm của công cuộc cải cách -- mở cửa ở Trung Quốc (từ tháng 12 - 1978) là</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. lấy phát triển kinh tế làm trọng tâm.</div>
+                    <div class="option" data-value="B">B. lấy cải tổ chính trị làm trọng tâm.</div>
+                    <div class="option" data-value="C">C. chú trọng phát triển văn hóa, giáo dục.</div>
+                    <div class="option" data-value="D">D. tập trung cải cách triệt để về kinh tế.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 43 -->
+            <div class="question" id="q43">
+                <div class="question-number">Câu 43. Một trong những biểu hiện chứng tỏ Liên Xô là thành trì của cách mạng thế giới từ năm 1950 đến nửa đầu những năm 70 của thế kỷ XX là gì?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Tích cực giúp đỡ các nước xã hội chủ nghĩa.</div>
+                    <div class="option" data-value="B">B. Trực tiếp đối đầu với các cường quốc phương Tây.</div>
+                    <div class="option" data-value="C">C. Làm phá sản hoàn toàn chiến lược toàn cầu của Mỹ.</div>
+                    <div class="option" data-value="D">D. Thúc đẩy sự hình thành xu thế hợp tác toàn cầu.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 44 -->
+            <div class="question" id="q44">
+                <div class="question-number">Câu 44. Sự kiện nào sau đây đánh dấu chủ nghĩa xã hội từ phạm vi một nước trở thành một hệ thống thế giới?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Thắng lợi của cuộc cách mạng Cu-ba đã lật đổ chế độ độc tài Batixta năm 1959.</div>
+                    <div class="option" data-value="B">B. Thắng lợi của cuộc cách mạng dân chủ nhân dân ở các nước Đông Âu (1945 -- 1949).</div>
+                    <div class="option" data-value="C">C. Cách mạng tháng Tám thành công, nước Việt Nam Dân chủ Cộng hòa ra đời (1945).</div>
+                    <div class="option" data-value="D">D. Nội chiến ở Trung Quốc kết thúc, nước Cộng hòa Nhân dân Trung Hoa ra đời (1949).</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 45 -->
+            <div class="question" id="q45">
+                <div class="question-number">Câu 45. Từ 1991, nước Cộng hòa Cu-ba đã phải đối mặt với nhiều khó khăn thách thức, đặc biệt là</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. sự chống phá của các thế lực thù địch trong nước.</div>
+                    <div class="option" data-value="B">B. chính quyền độc tài thân Mĩ chưa bị lật đổ.</div>
+                    <div class="option" data-value="C">C. con đường xã hội chủ nghĩa chưa có tính ưu việt.</div>
+                    <div class="option" data-value="D">D. lệnh cấm vận kéo dài của Mỹ và phương Tây.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 46 -->
+            <div class="question" id="q46">
+                <div class="question-number">Câu 46. Nội dung nào sau đây phản ánh không đúng đường lối mới trong công cuộc cải cách mở cửa ở Trung Quốc từ năm 1978?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Lấy phát triển kinh tế làm trung tâm.</div>
+                    <div class="option" data-value="B">B. Tiến hành cải cách và mở cửa.</div>
+                    <div class="option" data-value="C">C. Xây dựng kinh tế thị trường xã hội chủ nghĩa.</div>
+                    <div class="option" data-value="D">D. Thực hiện đường lối "Ba ngọn cờ hồng".</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 47 -->
+            <div class="question" id="q47">
+                <div class="question-number">Câu 47. Nội dung nào sau đây không phải là nguyên nhân dẫn đến khủng hoảng, sụp đổ của chế độ chủ nghĩa xã hội ở Liên Xô và các nước Đông Âu?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Không bắt kịp bước phát triển của khoa học - kĩ thuật tiên tiến trên thế giới.</div>
+                    <div class="option" data-value="B">B. Đường lối lãnh đạo mang tính chủ quan, duy ý chí, kinh tế tập trung, quan liêu.</div>
+                    <div class="option" data-value="C">C. Người dân không đồng tình, ủng hộ và tin tưởng vào chế độ chủ nghĩa xã hội.</div>
+                    <div class="option" data-value="D">D. Sự chống phá của các thế lực thù địch ở trong nước và các thế lực bên ngoài nước.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 48 -->
+            <div class="question" id="q48">
+                <div class="question-number">Câu 48. Nội dung nào sau đây không phải là thành tựu to lớn về kinh tế - xã hội của Trung Quốc từ khi cải cách mở cửa đến nay?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Bình quân tăng trưởng vượt xa mức trung bình của thế giới.</div>
+                    <div class="option" data-value="B">B. Có những trung tâm công nghệ cao, đặc khu kinh tế hàng đầu châu Á.</div>
+                    <div class="option" data-value="C">C. Trở thành một cường quốc đổi mới sáng tạo đứng đầu thế giới.</div>
+                    <div class="option" data-value="D">D. Đạt được những tiến bộ vượt bậc trong lĩnh vực công nghệ mới.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 49 -->
+            <div class="question" id="q49">
+                <div class="question-number">Câu 49. Trong những năm 1944 -1945, điều kiện khách quan thuận lợi nào đã thúc đẩy nhân dân các nước Đông Âu nổi dậy giành chính quyền, thành lập nhà nước dân chủ nhân dân?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Phát xít Đức chuyển hướng tấn công sang đánh chiếm các nước ở Bắc Âu và Tây Âu.</div>
+                    <div class="option" data-value="B">B. Sự viện trợ về mọi mặt của các nước xã hội chủ nghĩa như: Liên Xô, Trung Quốc,....</div>
+                    <div class="option" data-value="C">C. Thắng lợi của Hồng quân Liên Xô trong việc tiêu diệt chủ nghĩa phát xít ở châu Âu.</div>
+                    <div class="option" data-value="D">D. Phe Đồng minh suy yếu, liên tục thất bại và buộc phải rút khỏi mặt trận Đông Âu.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 50 -->
+            <div class="question" id="q50">
+                <div class="question-number">Câu 50. Trong những năm 1945 -1949, các nước Đông Âu đã hoàn thành cuộc cách mạng dân chủ nhân dân thông qua việc tiến hành nhiều chính sách tiến bộ, ngoại trừ việc</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. tiến hành công nghiệp hóa, hiện đại hóa đất nước.</div>
+                    <div class="option" data-value="B">B. quốc hữu hóa các nhà máy, xí nghiệp của tư bản.</div>
+                    <div class="option" data-value="C">C. ban hành các quyền tự do, dân chủ.</div>
+                    <div class="option" data-value="D">D. cải cách ruộng đất.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 51 -->
+            <div class="question" id="q51">
+                <div class="question-number">Câu 51. Từ năm 1949 đến nửa đầu những năm 70 của thế kỉ XX, các nước Đông Âu</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. đạt được nhiều thành tựu trong xây dựng chủ nghĩa xã hội.</div>
+                    <div class="option" data-value="B">B. thực hiện những nhiệm vụ của cách mạng dân chủ nhân dân.</div>
+                    <div class="option" data-value="C">C. lâm vào suy thoái, khủng hoảng kinh tế - xã hội trầm trọng.</div>
+                    <div class="option" data-value="D">D. tiến hành cải cách để đưa đất nước thoái khỏi khủng hoảng.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 52 -->
+            <div class="question" id="q52">
+                <div class="question-number">Câu 52. Năm 1949, Trung Quốc đã</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. lâm vào suy thoái, khủng hoảng nghiêm trọng về kinh tế - xã hội.</div>
+                    <div class="option" data-value="B">B. lựa chọn con đường phát triển đất nước theo hướng tư bản chủ nghĩa.</div>
+                    <div class="option" data-value="C">C. tiến hành cải cách mở cửa để đưa đất nước thoát khỏi khủng hoảng.</div>
+                    <div class="option" data-value="D">D. hoàn thành thắng lợi cuộc cách mạng dân tộc dân chủ nhân dân.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 53 -->
+            <div class="question" id="q53">
+                <div class="question-number">Câu 53. Hiện nay, quốc gia nào ở châu Á đi theo con đường xã hội chủ nghĩa?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Cộng hòa Nhân dân Trung Hoa.</div>
+                    <div class="option" data-value="B">B. Cộng hòa In-đô-nê-xi-a.</div>
+                    <div class="option" data-value="C">C. Đại Hàn Dân Quốc.</div>
+                    <div class="option" data-value="D">D. Nhật Bản.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 54 -->
+            <div class="question" id="q54">
+                <div class="question-number">Câu 54. Từ năm 1961, Cu-ba</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. bước vào thời kì xây dựng chủ nghĩa xã hội.</div>
+                    <div class="option" data-value="B">B. phá bỏ được sự bao vây, cấm vận của Mĩ.</div>
+                    <div class="option" data-value="C">C. bình thường hóa quan hệ ngoại giao với Mĩ.</div>
+                    <div class="option" data-value="D">D. tiến hành công cuộc đổi mới đất nước.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 55 -->
+            <div class="question" id="q55">
+                <div class="question-number">Câu 55. Từ nửa cuối những năm 70 -đầu những năm 80 của thế kỉ XX, các nước xã hội chủ nghĩa ở Đông Âu và Liên Xô</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. bước vào giai đoạn phát triển đỉnh cao.</div>
+                    <div class="option" data-value="B">B. ra đời và bước đầu đạt được nhiều thành tựu.</div>
+                    <div class="option" data-value="C">C. lâm vào suy thoái, khủng hoảng trên nhiều lĩnh vực.</div>
+                    <div class="option" data-value="D">D. tiến hành cải cách, đưa đất nước thoát khỏi khủng hoảng.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 56 -->
+            <div class="question" id="q56">
+                <div class="question-number">Câu 56. Chế độ xã hội chủ nghĩa sụp đổ ở Liên Xô vào thời gian nào?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. 1990.</div>
+                    <div class="option" data-value="B">B. 1991.</div>
+                    <div class="option" data-value="C">C. 1992.</div>
+                    <div class="option" data-value="D">D. 1993.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 57 -->
+            <div class="question" id="q57">
+                <div class="question-number">Câu 57. Công cuộc xây dựng chủ nghĩa xã hội từ sau năm 1991 tiếp tục được duy trì và đẩy mạnh ở những quốc gia nào sau đây?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Trung Quốc, Việt Nam, Lào, Cu-ba.</div>
+                    <div class="option" data-value="B">B. Trung Quốc, Nga, Việt Nam, Lào.</div>
+                    <div class="option" data-value="C">C. Hàn Quốc, Triều Tiên, Việt Nam, Cu-ba.</div>
+                    <div class="option" data-value="D">D. Lào, Cu-ba, Hàn Quốc, Nhật Bản.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 58 -->
+            <div class="question" id="q58">
+                <div class="question-number">Câu 58. Thành tựu trong công cuộc xây dựng chủ nghĩa xã hội ở Trung Quốc, Việt Nam, Lào, Cu-ba từ năm 1991 đã chứng minh</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. sức sống của chủ nghĩa xã hội trong một thế giới có nhiều biến động.</div>
+                    <div class="option" data-value="B">B. chủ nghĩa tư bản không còn là một hệ thống duy nhất trên thế giới.</div>
+                    <div class="option" data-value="C">C. chủ nghĩa xã hội ngày càng phát triển và mở rộng về không gian địa lí.</div>
+                    <div class="option" data-value="D">D. chủ nghĩa xã hội đã trở thành một hệ thống trên phạm vi thế giới.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 59 -->
+            <div class="question" id="q59">
+                <div class="question-number">Câu 59. Những thành tựu của công cuộc đổi mới, cải cách ở các nước châu Á, khu vực Mỹ La-tinh là cơ sở để khẳng định</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. con đường đi lên chủ nghĩa xã hội phù hợp với xu thế phát triển của thời đại.</div>
+                    <div class="option" data-value="B">B. chủ nghĩa xã hội ngày càng phát triển và mở rộng về không gian địa lí.</div>
+                    <div class="option" data-value="C">C. chủ nghĩa tư bản không còn là một hệ thống duy nhất trên thế giới.</div>
+                    <div class="option" data-value="D">D. chủ nghĩa xã hội đã trở thành một hệ thống trên phạm vi thế giới.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 60 -->
+            <div class="question" id="q60">
+                <div class="question-number">Câu 60. Nội dung nào sau đây không phản ánh đúng thành tựu mà nhân dân Trung Quốc đạt được trong công cuộc cải cách mở cửa (từ năm 1978 đến nay)?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Xây dựng được hệ thống lí luận về chủ nghĩa xã hội đặc sắc Trung Quốc.</div>
+                    <div class="option" data-value="B">B. Xây dựng được nền kinh tế kế hoạch hóa tập trung, quan liêu, bao cấp.</div>
+                    <div class="option" data-value="C">C. Trở thành quốc gia thứ 3 trên thế giới có tàu đưa con người bay vào vũ trụ.</div>
+                    <div class="option" data-value="D">D. Vai trò và vị thế quốc tế của Trung Quốc ngày càng được nâng cao.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 61 -->
+            <div class="question" id="q61">
+                <div class="question-number">Câu 61. Nội dung nào sau đây không phản ánh đúng ý nghĩa của công cuộc cải cách mở cửa ở Trung Quốc (từ năm 1978 đến nay?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Chứng tỏ sức sống của chủ nghĩa xã hội.</div>
+                    <div class="option" data-value="B">B. Nâng cao vị thế quốc tế của Trung Quốc.</div>
+                    <div class="option" data-value="C">C. Để lại nhiều kinh nghiệm cho các nước khác.</div>
+                    <div class="option" data-value="D">D. Củng cố tiềm lực cho hệ thống xã hội chủ nghĩa.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 62 -->
+            <div class="question" id="q62">
+                <div class="question-number">Câu 62. Điểm giống nhau cơ bản giữa cuộc cải cách mở cửa ở Trung Quốc (1978) và công cuộc đổi mới ở Việt Nam (1986) là gì?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Lấy cải tổ chính trị làm trọng tâm.</div>
+                    <div class="option" data-value="B">B. Lấy phát triển kinh tế làm trọng tâm.</div>
+                    <div class="option" data-value="C">C. Chỉ chú trọng phát triển văn hóa, giáo dục.</div>
+                    <div class="option" data-value="D">D. Tập trung cải cách triệt để về kinh tế.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 63 -->
+            <div class="question" id="q63">
+                <div class="question-number">Câu 63. Điểm tương đồng trong công cuộc cải cách mở cửa ở Trung Quốc (1978), công cuộc cải tổ của Liên Xô (1985 - 1991) và đổi mới đất nước ở Việt Nam (1986) là gì?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Củng cố và nâng cao vai trò lãnh đạo của Đảng Cộng sản.</div>
+                    <div class="option" data-value="B">B. Lấy phát triển kinh tế làm trọng tâm, tiến hành cải cách mở cửa.</div>
+                    <div class="option" data-value="C">C. Lấy cải tổ chính trị làm trọng tâm; thực hiện đa nguyên, đa đảng.</div>
+                    <div class="option" data-value="D">D. Tiến hành khi đất nước lâm vào tình trạng khủng hoảng kéo dài.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 64 -->
+            <div class="question" id="q64">
+                <div class="question-number">Câu 64. Từ cuối thế kỷ XX, vị thế của Trung Quốc không ngừng được nâng cao trên trường quốc tế là do</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. sự điều chỉnh chính sách đối ngoại và bình thường hóa quan hệ với nhiều nước.</div>
+                    <div class="option" data-value="B">B. sở hữu nhiều vũ khí hạt nhân và công nghệ quốc phòng nhiều nhất trên thế giới.</div>
+                    <div class="option" data-value="C">C. ra sức thực hiện "giấc mơ Trung Hoa", âm mưu làm bá chủ trên toàn thế giới.</div>
+                    <div class="option" data-value="D">D. thường xuyên gây ra nhiều cuộc chiến tranh xâm và nô dịch các nước láng giềng.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 65 -->
+            <div class="question" id="q65">
+                <div class="question-number">Câu 65. Từ sự sụp đổ của chủ nghĩa xã hội ở Liên Xô và các nước Đông Âu, Việt Nam rút ra bài học gì cho công cuộc xây dựng chủ nghĩa xã hội hiện nay?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Cải tổ, đổi mới về kinh tế - xã hội trước tiên, sau đó mới cải tổ về chính trị.</div>
+                    <div class="option" data-value="B">B. Duy trì sự lãnh đạo của Đảng Cộng sản, không chấp nhận đa nguyên chính trị.</div>
+                    <div class="option" data-value="C">C. Thực hiện chính sách "đóng cửa" nhằm hạn chế ảnh hưởng từ bên ngoài.</div>
+                    <div class="option" data-value="D">D. Xây dựng nền kinh tế thị trường tư bản chủ nghĩa để phát triển kinh tế.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Chủ đề 3 -->
+        <div class="section">
+            <div class="section-title">CHỦ ĐỀ 3: QUÁ TRÌNH GIÀNH ĐỘC LẬP DÂN TỘC CỦA CÁC QUỐC GIA ĐÔNG NAM Á</div>
+            
+            <!-- Bài 5 -->
+            <div style="font-weight: bold; color: #2c3e50; margin-bottom: 15px; font-size: 1.1em;">BÀI 5: QUÁ TRÌNH XÂM LƯỢC VÀ CAI TRỊ CỦA CHỦ NGHĨA THỰC DÂN Ở ĐÔNG NAM Á</div>
+            
+            <!-- Câu 66 -->
+            <div class="question" id="q66">
+                <div class="question-number">Câu 66. Từ thế kỉ XVI, các nước phương Tây bắt đầu xâm nhập vào khu vực Đông Nam Á thông qua hoạt động</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. buôn bán và truyền giáo.</div>
+                    <div class="option" data-value="B">B. đầu tư phát triển kinh tế.</div>
+                    <div class="option" data-value="C">C. mở rộng giao lưu văn hóa.</div>
+                    <div class="option" data-value="D">D. xây dựng cơ sở hạ tầng.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 67 -->
+            <div class="question" id="q67">
+                <div class="question-number">Câu 67. Các nước thực dân phương Tây xâm lược Đông Nam Á trong bối cảnh phần lớn các nước ở đây</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. có nền kinh tế phát triển mạnh mẽ.</div>
+                    <div class="option" data-value="B">B. có tình hình hình chính trị, xã hội ổn định.</div>
+                    <div class="option" data-value="C">C. chế độ phong kiến phát triển đỉnh cao.</div>
+                    <div class="option" data-value="D">D. chế độ phong kiến suy thoái, khủng hoảng.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 68 -->
+            <div class="question" id="q68">
+                <div class="question-number">Câu 68. Giữa thế kỉ XVI, Phi-líp-pin bị thực dân phương Tây nào xâm lược và thống trị?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Anh.</div>
+                    <div class="option" data-value="B">B. Pháp.</div>
+                    <div class="option" data-value="C">C. Hà Lan.</div>
+                    <div class="option" data-value="D">D. Tây Ban Nha.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 69 -->
+            <div class="question" id="q69">
+                <div class="question-number">Câu 69. Cuối thế kỉ XVI, thực dân Hà Lan tiến hành xâm lược quốc gia nào sau đây ở khu vực Đông Nam Á?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Miến Điện.</div>
+                    <div class="option" data-value="B">B. In-đô-nê-xi-a.</div>
+                    <div class="option" data-value="C">C. Xin-ga-po.</div>
+                    <div class="option" data-value="D">D. Cam-pu-chia.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 70 -->
+            <div class="question" id="q70">
+                <div class="question-number">Câu 70. Cuối thế kỉ XIX, Việt Nam, Lào, Campuchia đã trở thành thuộc địa của thực dân</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Anh.</div>
+                    <div class="option" data-value="B">B. Pháp.</div>
+                    <div class="option" data-value="C">C. Tây Ban Nha.</div>
+                    <div class="option" data-value="D">D. Bồ Đào Nha.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 71 -->
+            <div class="question" id="q71">
+                <div class="question-number">Câu 71. Đầu thế kỉ XX, hầu hết các nước trong khu vực Đông Nam Á đều trở thành</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. các nước dân chủ cộng hòa độc lập.</div>
+                    <div class="option" data-value="B">B. thuộc địa của thực dân phương Tây.</div>
+                    <div class="option" data-value="C">C. trung tâm hàng hải lớn trên thế giới.</div>
+                    <div class="option" data-value="D">D. các quốc gia phong kiến độc lập, tự chủ.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 72 -->
+            <div class="question" id="q72">
+                <div class="question-number">Câu 72. Sự kiện nào sau đây đã mở đầu quá trình xâm lược của chủ nghĩa thực dân ở khu vực Đông Nam Á?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Bồ Đào Nha đánh chiếm Ma -- lắc -- ca (Ma -- lai -- xi -- a).</div>
+                    <div class="option" data-value="B">B. Tây Ban Nha xâm lược và thống trị Phi -- lip -- pin.</div>
+                    <div class="option" data-value="C">C. Thực dân Pháp đánh chiếm Đà Nẵng (Việt Nam).</div>
+                    <div class="option" data-value="D">D. Hà Lan xâm lược In -- đô -- nê -- xi -- a.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 73 -->
+            <div class="question" id="q73">
+                <div class="question-number">Câu 73. Một trong những chính sách cai trị về kinh tế của thực dân phương Tây đối với các nước Đông Nam Á từ cuối thế kỉ XIX là</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. vơ vét tài nguyên thiên nhiên.</div>
+                    <div class="option" data-value="B">B. đưa quân đội trực tiếp cai trị.</div>
+                    <div class="option" data-value="C">C. tập trung phát triển công nghiệp nặng.</div>
+                    <div class="option" data-value="D">D. truyền bá và áp đặt Thiên chúa giáo.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 74 -->
+            <div class="question" id="q74">
+                <div class="question-number">Câu 74. Một trong những chính sách cai trị về văn hóa, xã hội của thực dân phương Tây đối với các nước Đông Nam Á từ cuối thế kỉ XIX là</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. thực hiện chính sách chia để trị.</div>
+                    <div class="option" data-value="B">B. cử học sinh giỏi đi du học phương Tây.</div>
+                    <div class="option" data-value="C">C. thực hiện chính sách ngu dân.</div>
+                    <div class="option" data-value="D">D. xây dựng cơ sở hạ tầng hiện đại.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 75 -->
+            <div class="question" id="q75">
+                <div class="question-number">Câu 75. Công cuộc cải cách toàn diện ở nước Xiêm cuối thế kỉ XIX chủ yếu được tiến hành dưới thời trị vì của vua</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Rama V.</div>
+                    <div class="option" data-value="B">B. Nô -rô - đôm.</div>
+                    <div class="option" data-value="C">C. Minh Trị.</div>
+                    <div class="option" data-value="D">D. Quang Tự.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 76 -->
+            <div class="question" id="q76">
+                <div class="question-number">Câu 76. Nội dung nào sau đây phản ánh đúng bối cảnh lịch sử của vương quốc Xiêm cuối thế kỉ XIX?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Đất nước phát triển mạnh theo con đường tư bản chủ nghĩa.</div>
+                    <div class="option" data-value="B">B. Đứng trước sự đe dọa xâm lược của thực dân phương Tây.</div>
+                    <div class="option" data-value="C">C. Chế độ phong kiến bước vào thời kì phát triển thịnh đạt.</div>
+                    <div class="option" data-value="D">D. Các cuộc khởi nghĩa của nông dân diễn ra liên tiếp.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 77 -->
+            <div class="question" id="q77">
+                <div class="question-number">Câu 77. Trong công cuộc cải cách cuối thế kỉ XIX, chính phủ Xiêm đã thực hiện chính sách nào sau đây về mặt văn hóa -- giáo dục?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Xây dựng hệ thống luật pháp hiện đại.</div>
+                    <div class="option" data-value="B">B. Thành lập các trường đại học hiện đại.</div>
+                    <div class="option" data-value="C">C. Xóa bỏ chế lao dịch và nô lệ vì nợ.</div>
+                    <div class="option" data-value="D">D. Phát triển nông nghiệp và giảm thuế.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 78 -->
+            <div class="question" id="q78">
+                <div class="question-number">Câu 78. Trong công cuộc cải cách cuối thế kỉ XIX, chính phủ Xiêm đã thực hiện chính sách nào sau đây về mặt kinh tế?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Khuyến khích đầu tư vào các ngành công nghiệp, giao thông.</div>
+                    <div class="option" data-value="B">B. Công bố chương trình giáo dục quốc gia đầu tiên ở Xiêm.</div>
+                    <div class="option" data-value="C">C. Cắt nhượng một số vùng lãnh thổ thuộc ảnh hưởng của Xiêm.</div>
+                    <div class="option" data-value="D">D. Xây dựng mô hình nhà nước thống nhất, tập trung, hiện đại.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 79 -->
+            <div class="question" id="q79">
+                <div class="question-number">Câu 79. Trong công cuộc cải cách cuối thế kỉ XIX, chính phủ Xiêm đã thực hiện chính sách nào sau đây về mặt chính trị?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Khuyến khích đầu tư vào các ngành công nghiệp, giao thông.</div>
+                    <div class="option" data-value="B">B. Công bố chương trình giáo dục quốc gia đầu tiên ở Xiêm.</div>
+                    <div class="option" data-value="C">C. Cắt nhượng một số vùng lãnh thổ thuộc ảnh hưởng của Xiêm.</div>
+                    <div class="option" data-value="D">D. Xây dựng mô hình nhà nước thống nhất, tập trung, hiện đại.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+            
+            <!-- Câu 80 -->
+            <div class="question" id="q80">
+                <div class="question-number">Câu 80. Nhận thức được mối đe dọa của chủ nghĩa thực dân và nhu cầu phát triển đất nước, từ nửa sau thế kỉ XIX, triều đình Xiêm đã có hoạt động nào sau đây?</div>
+                <div class="options">
+                    <div class="option" data-value="A">A. Tiến hành công cuộc cải cách đất nước theo hướng hiện đại.</div>
+                    <div class="option" data-value="B">B. Mở lớp dạy tiếng Anh và tiếng Pháp cho quan lại theo học.</div>
+                    <div class="option" data-value="C">C. Mua các phát minh của nước ngoài ứng dụng vào sản xuất.</div>
+                    <div class="option" data-value="D">D. Cắt một phần đất đai cho Anh và Pháp để đổi lấy hòa bình.</div>
+                </div>
+                <div class="answer-feedback"></div>
+            </div>
+        </div>
+        
+        <div class="control-panel">
+            <button id="submit-btn">Nộp bài và xem kết quả</button>
+            <button id="reset-btn">Làm lại bài thi</button>
+        </div>
+        
+        <div id="results" class="results">
+            <div class="score">Điểm của bạn: <span id="score-value">0</span>/80</div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="score-detail" id="score-detail">Bạn đã trả lời đúng <span id="correct-count">0</span> trên <span id="total-count">80</span> câu hỏi.</div>
+            <div class="question-stats">
+                <div class="stat">
+                    <span class="stat-number correct-stat" id="correct-stat">0</span>
+                    <span>Câu đúng</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number incorrect-stat" id="incorrect-stat">0</span>
+                    <span>Câu sai</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number unanswered-stat" id="unanswered-stat">80</span>
+                    <span>Chưa trả lời</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Đáp án đúng cho tất cả các câu hỏi (80 câu)
+        const correctAnswers = {
+            // Bài 3: Câu 1-28
+            q1: "B", q2: "A", q3: "C", q4: "A", q5: "A",
+            q6: "A", q7: "A", q8: "A", q9: "A", q10: "B",
+            q11: "B", q12: "B", q13: "A", q14: "A", q15: "A",
+            q16: "A", q17: "C", q18: "D", q19: "C", q20: "D",
+            q21: "D", q22: "D", q23: "A", q24: "A", q25: "D",
+            q26: "D", q27: "A", q28: "B",
+            
+            // Bài 4: Câu 29-65
+            q29: "A", q30: "A", q31: "D", q32: "C", q33: "B",
+            q34: "D", q35: "D", q36: "A", q37: "B", q38: "A",
+            q39: "A", q40: "C", q41: "A", q42: "A", q43: "A",
+            q44: "B", q45: "D", q46: "D", q47: "C", q48: "C",
+            q49: "C", q50: "A", q51: "A", q52: "D", q53: "A",
+            q54: "A", q55: "C", q56: "B", q57: "A", q58: "A",
+            q59: "A", q60: "B", q61: "D", q62: "B", q63: "D",
+            q64: "A", q65: "B",
+            
+            // Bài 5: Câu 66-80
+            q66: "A", q67: "D", q68: "D", q69: "B", q70: "B",
+            q71: "B", q72: "A", q73: "A", q74: "C", q75: "A",
+            q76: "B", q77: "B", q78: "A", q79: "D", q80: "A"
+        };
+        
+        // Lưu trữ câu trả lời của người dùng
+        const userAnswers = {};
+        
+        // Hàm kiểm tra câu trả lời và hiển thị kết quả ngay lập tức
+        function checkAnswer(questionId, selectedValue) {
+            const questionElement = document.getElementById(questionId);
+            const correctAnswer = correctAnswers[questionId];
+            const options = questionElement.querySelectorAll('.option');
+            
+            // Xóa lớp selected từ tất cả các option
+            options.forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Đánh dấu option được chọn
+            const selectedOption = Array.from(options).find(option => option.getAttribute('data-value') === selectedValue);
+            if (selectedOption) {
+                selectedOption.classList.add('selected');
+            }
+            
+            // Kiểm tra đúng/sai
+            const isCorrect = selectedValue === correctAnswer;
+            
+            // Đánh dấu màu cho các option
+            options.forEach(option => {
+                const optionValue = option.getAttribute('data-value');
+                if (optionValue === correctAnswer) {
+                    option.classList.add('correct');
+                } else if (optionValue === selectedValue && !isCorrect) {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            // Hiển thị phản hồi
+            const feedbackElement = questionElement.querySelector('.answer-feedback');
+            if (isCorrect) {
+                feedbackElement.textContent = "Chính xác!";
+                feedbackElement.className = "answer-feedback correct";
+            } else {
+                feedbackElement.textContent = `Sai rồi! Đáp án đúng là: ${correctAnswer}`;
+                feedbackElement.className = "answer-feedback incorrect";
+            }
+            
+            // Lưu câu trả lời của người dùng
+            userAnswers[questionId] = selectedValue;
+            
+            // Đánh dấu câu hỏi đã trả lời
+            questionElement.classList.add('answered');
+            
+            // Cập nhật thống kê
+            updateStats();
+        }
+        
+        // Hàm cập nhật thống kê
+        function updateStats() {
+            let correctCount = 0;
+            let answeredCount = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            
+            // Đếm số câu trả lời đúng và tổng số câu đã trả lời
+            for (const questionId in userAnswers) {
+                answeredCount++;
+                if (userAnswers[questionId] === correctAnswers[questionId]) {
+                    correctCount++;
+                }
+            }
+            
+            // Cập nhật thống kê
+            document.getElementById('correct-stat').textContent = correctCount;
+            document.getElementById('incorrect-stat').textContent = answeredCount - correctCount;
+            document.getElementById('unanswered-stat').textContent = totalQuestions - answeredCount;
+            
+            // Cập nhật thanh tiến trình
+            const progressPercentage = (answeredCount / totalQuestions) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercentage}%`;
+        }
+        
+        // Hàm tính điểm và hiển thị kết quả tổng
+        function showResults() {
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            
+            // Tính điểm
+            for (const questionId in correctAnswers) {
+                if (userAnswers[questionId] === correctAnswers[questionId]) {
+                    score++;
+                }
+            }
+            
+            // Tính phần trăm
+            const percentage = ((score / totalQuestions) * 100).toFixed(1);
+            
+            // Hiển thị kết quả
+            document.getElementById('score-value').textContent = `${score}/${totalQuestions} (${percentage}%)`;
+            document.getElementById('correct-count').textContent = score;
+            document.getElementById('total-count').textContent = totalQuestions;
+            document.getElementById('results').style.display = 'block';
+            
+            // Cuộn đến kết quả
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+            
+            // Cập nhật thống kê cuối cùng
+            updateStats();
+        }
+        
+        // Hàm reset bài thi
+        function resetTest() {
+            // Xóa tất cả các lựa chọn
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Xóa phản hồi
+            const allFeedback = document.querySelectorAll('.answer-feedback');
+            allFeedback.forEach(feedback => {
+                feedback.textContent = '';
+                feedback.className = "answer-feedback";
+            });
+            
+            // Xóa lớp answered
+            const allQuestions = document.querySelectorAll('.question');
+            allQuestions.forEach(question => {
+                question.classList.remove('answered');
+            });
+            
+            // Xóa câu trả lời của người dùng
+            for (const key in userAnswers) {
+                delete userAnswers[key];
+            }
+            
+            // Ẩn kết quả
+            document.getElementById('results').style.display = 'none';
+            
+            // Reset thống kê
+            document.getElementById('correct-stat').textContent = '0';
+            document.getElementById('incorrect-stat').textContent = '0';
+            document.getElementById('unanswered-stat').textContent = Object.keys(correctAnswers).length;
+            document.getElementById('progress-bar').style.width = '0%';
+            
+            // Cuộn lên đầu trang
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Thêm sự kiện click cho tất cả các option
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const questionId = this.closest('.question').id;
+                const selectedValue = this.getAttribute('data-value');
+                checkAnswer(questionId, selectedValue);
+            });
+        });
+        
+        // Thêm sự kiện cho nút nộp bài
+        document.getElementById('submit-btn').addEventListener('click', showResults);
+        
+        // Thêm sự kiện cho nút làm lại
+        document.getElementById('reset-btn').addEventListener('click', resetTest);
+        
+        // Khởi tạo thống kê
+        updateStats();
+    </script>
+</body>
+</html>
